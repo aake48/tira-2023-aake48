@@ -40,10 +40,10 @@ public class Algorithms {
           * element in currentIndex - 1
           */
 
-         int previousIndex = currentIndex;
+         int previousIndex = currentIndex - 1;
 
-         while (previousIndex > fromIndex && array[previousIndex - 1].compareTo(currentElement) > 0) {
-            swap(array, previousIndex, previousIndex - 1);
+         while (previousIndex >= fromIndex && array[previousIndex].compareTo(currentElement) > 0) {
+            swap(array, previousIndex, previousIndex + 1);
             previousIndex--;
          }
       }

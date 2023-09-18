@@ -188,16 +188,18 @@ public class Coder implements Comparable<Coder> {
 	 * Note: this class has a natural ordering that is inconsistent with equals.
 	 * 
 	 * Equals compares the equality of the Coder.id, as compareTo compares
-	 * the Coder full names. This is to make sure we can hold several coders 
+	 * the Coder full names. This is to make sure we can hold several coders
 	 * in containers having the same name (as happens in real world), but still
 	 * can identify them as different Coders using the Coder.id.
 	 * 
-	 * TODO: Implement compareTo so that the order of coders ordered by using this methos
-	 * will be natural order. Meaning, alphabetical order A...Ö (by lastname-firstname order).
+	 * TODO: Implement compareTo so that the order of coders ordered by using this
+	 * methos
+	 * will be natural order. Meaning, alphabetical order A...Ö (by
+	 * lastname-firstname order).
 	 */
 	@Override
 	public int compareTo(Coder another) {
-		return	this.getFullName().compareTo(another.getFullName());
+		return this.getFullName().compareTo(another.getFullName());
 	}
 
 	/**

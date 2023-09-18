@@ -11,7 +11,7 @@ public class SimpleContainer<E extends Comparable<E>> implements TIRAContainer<E
 
 	private static final int DEFAULT_ARRAY_SIZE = 20;
 
-	private E [] array = null;
+	private E[] array = null;
 	private Class<E> clazz;
 
 	private int count = 0;
