@@ -38,6 +38,22 @@ Alaluvut jokaisen tehtävän raportille löydät alta.
 
 ## 01-TASK
 
+* Mitä opin, mikä oli vaikeaa, mikä helppoa jne.
+
+Tehtävässä opin muodostamaan yksinkertaisen lajittelualgoritmin. Helppoa tehtävässä oli perusasiat, eli toistorakenteiden käyttö jne. Mielestäni vaikeinta oli hahmottaa miten algoritmi tarkalleen ottaen toimii, ja sen takia minulla piti monta kertaa hahmotella paperille, mitä taulukossa tapahtuu lajittelun aikana. Vaikka kyseinen algoritmi on toteutettu aikaisemmalla kurssilla, niin kesän aikana koodaus on jäänyt vähemmälle, ja tämän takia piti tehdä suhteellisen paljon mieleen palauttelua että pääsin asiasta jyvälle ja sisäistin sen. Tehtävässä korostui myös hyvin koodin uudelleenkäytettävyys, esimerkiksi swap algoritmin käyttäminen muissa algoritmeissa sekä ensin tekemällä insertionSort(T[] array, int fromIndex, int toIndex) algoritmi, jonka jälkeen sitä pystyi hyödyntämään insertionSort(T[] array) algoritmissa. Reverse algoritmin pystyi myös toteuttamaan samalla tavalla.
+
+* Mikä on toteuttamasi lajittelualgortmin aikakompleksisuusluokka?
+
+Lajittelualgoritmin aikakompleksisuusluokka on neliöllinen eli O(n^2). Eli tietomäärän kasvaessa tarpeeksi, kasvaa algoritmin suoritusaika eksponentiaalisesti. Algoritmi toimii sujuvasti pienien tietomäärien kanssa, eikä se vaadi lisämuistia tehden siitä hyvän vaihtoehdon jos tietomäärät ovat pieniä. Jos tietomäärät ovat suuria, menee algoritmilla paljon aikaa lajitteluun eikä tämän takia sovellu hyvin käyttöön niiden kanssa.
+
+* Mikä on toteuttamasi reverse -algoritmin aikakompleksisuusluokka?
+
+Reverse -algoritmin aikakompleksisuusluokka on lineaarinen O(n) eli tietomäärän kasvaessa, algoritmin suoritusaika kasvaa lineaarisesti
+
+* Jos taulukko on jo valmiiksi järjestyksessä nousevaan järjestykseen, ja se aiotaan lajitella laskevaan järjestykseen, kannattaako taulukko lajitella vai kääntää sen järjestys? Miksi, perustele?
+
+Koska taulukko on jo valmiiksi järjestyksessä nousevaan järjestykseen, niin ei ole tarvetta tehdä taulukon alkioiden vertailua. Tämän takia taulukko kannattaa kääntää lajittelun sijasta, koska se on aikatehokkaampaa.
+
 ## 02-TASK
 
 ## 03-TASK

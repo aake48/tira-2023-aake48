@@ -8,12 +8,22 @@ public class Algorithms {
       // nada
    }
 
+   public static <T> void swap(T[] array, int first, int second) {
+
+      if (array != null && first >= 0 && first < array.length && second >= 0 && second < array.length) {
+         T temp = array[first];
+         array[first] = array[second];
+         array[second] = temp;
+      }
+
+   }
+
    ///////////////////////////////////////////
    // Insertion Sort for the whole array
    ///////////////////////////////////////////
 
    public static <T extends Comparable<T>> void insertionSort(T[] array) {
-      // TODO: Student, implement this.
+      insertionSort(array, 0, array.length);
    }
 
    ///////////////////////////////////////////
@@ -21,7 +31,22 @@ public class Algorithms {
    ///////////////////////////////////////////
 
    public static <T extends Comparable<T>> void insertionSort(T[] array, int fromIndex, int toIndex) {
-      // TODO: Student, implement this.
+
+      for (int currentIndex = fromIndex; currentIndex < toIndex; currentIndex++) {
+         // Storing the element in currentIndex for comparing
+         T currentElement = array[currentIndex];
+         /*
+          * Index that is used in the innder loop to compare the currentElement and the
+          * element in currentIndex - 1
+          */
+
+         int previousIndex = currentIndex;
+
+         while (previousIndex > fromIndex && array[previousIndex - 1].compareTo(currentElement) > 0) {
+            swap(array, previousIndex, previousIndex - 1);
+            previousIndex--;
+         }
+      }
    }
 
    //////////////////////////////////////////////////////////
@@ -30,6 +55,7 @@ public class Algorithms {
 
    public static <T> void insertionSort(T[] array, Comparator<T> comparator) {
       // TODO: Student, implement this.
+
    }
 
    ////////////////////////////////////////////////////////////
@@ -45,7 +71,7 @@ public class Algorithms {
    ///////////////////////////////////////////
 
    public static <T> void reverse(T[] array) {
-      // TODO: Student, implement this.
+      reverse(array, 0, array.length);
    }
 
    ///////////////////////////////////////////
@@ -53,11 +79,16 @@ public class Algorithms {
    ///////////////////////////////////////////
 
    public static <T> void reverse(T[] array, int fromIndex, int toIndex) {
-      // TODO: Student, implement this.
+
+      if (array != null && fromIndex > 0 && toIndex <= array.length) {
+         for (int currentIndex = fromIndex; currentIndex < toIndex; currentIndex++) {
+
+            for (int nextIndex = currentIndex + 1; nextIndex < toIndex; nextIndex++) {
+               swap(array, currentIndex, nextIndex);
+            }
+         }
+      }
    }
-
-
-
 
    ///////////////////////////////////////////
    // Binary search bw indices
@@ -75,15 +106,15 @@ public class Algorithms {
       return -1;
    }
 
-   public static <E extends Comparable<E>> void fastSort(E [] array) {
+   public static <E extends Comparable<E>> void fastSort(E[] array) {
       // TODO: Student, implement this.
    }
 
-   public static <E> void fastSort(E [] array, Comparator<E> comparator) {
+   public static <E> void fastSort(E[] array, Comparator<E> comparator) {
       // TODO: Student, implement this.
    }
 
-   public static <E> void fastSort(E [] array, int fromIndex, int toIndex, Comparator<E> comparator) {
+   public static <E> void fastSort(E[] array, int fromIndex, int toIndex, Comparator<E> comparator) {
       // TODO: Student, implement this.
    }
 
