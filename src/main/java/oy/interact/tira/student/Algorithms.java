@@ -54,7 +54,7 @@ public class Algorithms {
    //////////////////////////////////////////////////////////
 
    public static <T> void insertionSort(T[] array, Comparator<T> comparator) {
-      // TODO: Student, implement this.
+      insertionSort(array, 0, array.length, comparator);
 
    }
 
@@ -63,7 +63,22 @@ public class Algorithms {
    ////////////////////////////////////////////////////////////
 
    public static <T> void insertionSort(T[] array, int fromIndex, int toIndex, Comparator<T> comparator) {
-      // TODO: Student, implement this.
+
+      for (int currentIndex = fromIndex; currentIndex < toIndex; currentIndex++) {
+         // Storing the element in currentIndex for comparing
+         T currentElement = array[currentIndex];
+         /*
+          * Index that is used in the innder loop to compare the currentElement and the
+          * element in currentIndex - 1
+          */
+
+         int previousIndex = currentIndex - 1;
+
+         while (previousIndex >= fromIndex && comparator.compare(array[previousIndex], currentElement)> 0) {
+            swap(array, previousIndex, previousIndex + 1);
+            previousIndex--;
+         }
+      }
    }
 
    ///////////////////////////////////////////
