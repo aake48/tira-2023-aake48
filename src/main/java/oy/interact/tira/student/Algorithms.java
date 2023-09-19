@@ -64,6 +64,7 @@ public class Algorithms {
 
    public static <T> void insertionSort(T[] array, int fromIndex, int toIndex, Comparator<T> comparator) {
 
+      
       for (int currentIndex = fromIndex; currentIndex < toIndex; currentIndex++) {
          // Storing the element in currentIndex for comparing
          T currentElement = array[currentIndex];
@@ -74,7 +75,7 @@ public class Algorithms {
 
          int previousIndex = currentIndex - 1;
 
-         while (previousIndex >= fromIndex && comparator.compare(array[previousIndex], currentElement)> 0) {
+         while (previousIndex >= fromIndex && currentElement != null && comparator.compare(array[previousIndex], currentElement)> 0) {
             swap(array, previousIndex, previousIndex + 1);
             previousIndex--;
          }
