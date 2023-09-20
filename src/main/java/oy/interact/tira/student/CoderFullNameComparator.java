@@ -1,5 +1,4 @@
 package oy.interact.tira.student;
-
 import java.util.Comparator;
 
 import oy.interact.tira.model.Coder;
