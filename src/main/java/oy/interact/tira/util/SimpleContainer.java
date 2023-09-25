@@ -4,7 +4,6 @@ import java.lang.reflect.Array;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
-import oy.interact.tira.NotYetImplementedException;
 import oy.interact.tira.student.Algorithms;
 
 public class SimpleContainer<E extends Comparable<E>> implements TIRAContainer<E> {
@@ -60,23 +59,26 @@ public class SimpleContainer<E extends Comparable<E>> implements TIRAContainer<E
 
 	@Override
 	public E get(E element) throws IllegalArgumentException {
-		for (int currentIndex = 0; currentIndex < count; currentIndex++){
-			if (array[currentIndex].equals(element)){
-				return element;
+		if(element != null){
+		for (int currentIndex = 0; currentIndex < count; currentIndex++) {
+			if (array[currentIndex].equals(element)) {
+				return array[currentIndex];
 			}
 		}
+	}
 		return null;
-		
+
 	}
 
 	@Override
 	public int indexOf(E element, Comparator<E> usingComparator) {
-		
-		for (int currentIndex = 0; currentIndex < count; currentIndex++){
-			if(array[currentIndex].compareTo(element) == 0){
+
+		for (int currentIndex = 0; currentIndex < count; currentIndex++) {
+			if (array[currentIndex].compareTo(element) == 0) {
 				return currentIndex;
 			}
 		}
+		// if index not found, return -1
 		return -1;
 	}
 
@@ -123,19 +125,19 @@ public class SimpleContainer<E extends Comparable<E>> implements TIRAContainer<E
 
 	@Override
 	public int findIndex(Predicate<E> searcher) {
-		for (int currentIndex = 0; currentIndex < count; currentIndex++){
-			if(searcher.test(array[currentIndex])){
+		for (int currentIndex = 0; currentIndex < count; currentIndex++) {
+			if (searcher.test(array[currentIndex])) {
 				return currentIndex;
 			}
 		}
-		
+
 		return -1;
 	}
 
 	@Override
 	public E find(Predicate<E> searcher) {
-		for (int currentIndex = 0; currentIndex < count; currentIndex++){
-			if(searcher.test(array[currentIndex])){
+		for (int currentIndex = 0; currentIndex < count; currentIndex++) {
+			if (searcher.test(array[currentIndex])) {
 				return array[currentIndex];
 			}
 		}
@@ -203,7 +205,6 @@ public class SimpleContainer<E extends Comparable<E>> implements TIRAContainer<E
 	@Override
 	public void reverse() {
 		Algorithms.reverse(array, 0, count);
-		this.sorted = true;
 	}
 
 	// TEACHERS: TODO: Remove the call to Algorithms sort method.
@@ -216,9 +217,10 @@ public class SimpleContainer<E extends Comparable<E>> implements TIRAContainer<E
 	// TEACHERS: TODO: Remove the call to Algorithms sort method.
 	@Override
 	public void sort(Comparator<E> usingComparator) {
-
+		if(usingComparator != null){
 		Algorithms.insertionSort(array, 0, count, usingComparator);
 		this.sorted = true;
+		}
 	}
 
 }
