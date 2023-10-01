@@ -58,8 +58,33 @@ Koska taulukko on jo valmiiksi järjestyksessä nousevaan järjestykseen, niin e
 
 Tässä tehtävässä opin lisää lajittelusta, Comparator rajapinnasta sekä Predicate rajapinnasta. Pystyin hyödyntämään opittua TIRA Codersin koodareiden lajittelussa. Opin myös tekemään lineaarisen hakualgoritmin, sekä elementtien etsimiseen tarkoitettuja algoritmeja.
 
+TIRA Coders -sovelluksen lajittelutapojen testaaminen isoilla tiedostoilla, sekä lajittelutapojen analysointi.
+
+Pätkä testailun tuloksista:
+
+     PhoneBookArray: Sorting took 619 ms
+     PhoneBookArray: Sorting took 2559 ms
+     PhoneBookArray: Sorting took 620 ms
+     PhoneBookArray: Sorting took 2625 ms
+
+Kun aikaa menee 600 ms on vaihto tehty Full name -> Coder name
+Kun aikaa menee +2000ms, niin vaihto on tehty Coder name -> Full name
+
+Syy on siinä, että monella koodarilla saattaa olla sama Coder name, jolloin osa tiedoista on jo oikeassa paikassa, jolloin lajittelussa menee vähemmän aikaa ja päinvastoin koska koodareiden koko nimet eroavat paljon, joutuu lajitteluun käyttämään myös enemmän aikaa, kun pienempi osa tiedoista on oikealla kohdalla.
+
+Aikatehokkuus testien tulokset lineaarisessa haku algoritmissä sekä add metodissa:
+x-akselilla on tietomäärä, y-akselilla aika.
+
 [Hakuaika](TIRA_TASK02_Hakuaika.png)
 [Tayttoaika](TIRA_TASK02_Tayttoaika.png)
+
+Käyristä voi nähdä, että ne ovat lineaarisesti kasvavia, eli tietomäärän kasvaessa, kasvaa myös suoritusaika
+
+* Miksi toteutettuja hakualgoritmeja kutsutaan lineaarisiksi?
+	Hakualgoritmeja kutsutaan lineaarisiksi, koska niiden suoritusaika kasvaa lineaarisesti suhteessa tietomäärään jota käsitellään.
+
+* Mikä niiden aikakompleksisuusluokka on big-O -notaatiolla esiteltynä?
+	Lineaarisilla algoritmeilla aikakompleksisuus luokka big-O notaatiolla esiteltynä on O(N)
 
 ## 03-TASK
 

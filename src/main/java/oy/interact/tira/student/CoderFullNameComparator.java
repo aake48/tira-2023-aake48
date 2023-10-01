@@ -11,7 +11,6 @@ public class CoderFullNameComparator implements Comparator<Coder> {
 
         if (coder1 != null && coder2 != null) {
             return coder1.getFullName().compareTo(coder2.getFullName());
-
         }
         // If one of the coders is null, return -2
         return -2;

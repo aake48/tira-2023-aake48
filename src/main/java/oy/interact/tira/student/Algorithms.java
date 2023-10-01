@@ -32,6 +32,8 @@ public class Algorithms {
 
    public static <T extends Comparable<T>> void insertionSort(T[] array, int fromIndex, int toIndex) {
 
+
+      if (array != null && fromIndex >= 0 && toIndex <= array.length){
       for (int currentIndex = fromIndex; currentIndex < toIndex; currentIndex++) {
          // Storing the element in currentIndex for comparing
          T currentElement = array[currentIndex];
@@ -47,6 +49,7 @@ public class Algorithms {
             previousIndex--;
          }
       }
+   }
    }
 
    //////////////////////////////////////////////////////////
@@ -64,20 +67,22 @@ public class Algorithms {
 
    public static <T> void insertionSort(T[] array, int fromIndex, int toIndex, Comparator<T> comparator) {
 
-      for (int currentIndex = fromIndex; currentIndex < toIndex; currentIndex++) {
-         // Storing the element in currentIndex for comparing
-         T currentElement = array[currentIndex];
-         /*
-          * Index that is used in the innder loop to compare the currentElement and the
-          * element in currentIndex - 1
-          */
+      if (array != null && fromIndex >= 0 && toIndex < array.length && comparator != null) {
+         for (int currentIndex = fromIndex; currentIndex < toIndex; currentIndex++) {
+            // Storing the element in currentIndex for comparing
+            T currentElement = array[currentIndex];
+            
+            /*
+             * Index that is used in the innder loop to compare the currentElement and the
+             * element in currentIndex - 1
+             */
+            int previousIndex = currentIndex - 1;
 
-         int previousIndex = currentIndex - 1;
-
-         while (previousIndex >= fromIndex && currentElement != null
-               && comparator.compare(array[previousIndex], currentElement) > 0) {
-            swap(array, previousIndex, previousIndex + 1);
-            previousIndex--;
+            while (previousIndex >= fromIndex && currentElement != null
+                  && comparator.compare(array[previousIndex], currentElement) > 0) {
+               swap(array, previousIndex, previousIndex + 1);
+               previousIndex--;
+            }
          }
       }
    }
@@ -96,9 +101,8 @@ public class Algorithms {
 
    public static <T> void reverse(T[] array, int fromIndex, int toIndex) {
 
-
-      //Don Hämäläinen auttanut algoritmin "siistimisessä",
-      //aikasempi toteutus tehty kahdella for -silmukalla.
+      // Don Hämäläinen auttanut algoritmin "siistimisessä",
+      // aikasempi toteutus ollut monimutkaisempi ja aikatehokkuudeltaan huono
       for (int currentIndex = fromIndex; currentIndex < toIndex / 2; currentIndex++) {
          swap(array, currentIndex, toIndex - 1 - currentIndex);
       }
@@ -110,6 +114,20 @@ public class Algorithms {
    ///////////////////////////////////////////
 
    public static <T extends Comparable<T>> int binarySearch(T aValue, T[] fromArray, int fromIndex, int toIndex) {
+      int low = fromIndex;
+      int high = toIndex - 1;
+      
+      while (low <= high){
+          int middle = low + (high - low) / 2;
+          if (fromArray[middle].compareTo(aValue) == 0){
+            return middle;
+          }else if (fromArray[middle].compareTo(aValue) < 0){
+            low = middle + 1;
+          }else{
+            high = middle - 1;
+          }
+      }
+
       return -1;
    }
 
@@ -117,7 +135,22 @@ public class Algorithms {
    // Binary search using a Comparator
    ///////////////////////////////////////////
 
-   public static <T> int binarySearch(T aValue, T[] fromArray, int fromIndex, int toIndex, Comparator<T> comparator) {
+    public static <T> int binarySearch(T aValue, T[] fromArray, int fromIndex, int toIndex, Comparator<T> comparator) {
+
+      int low = fromIndex;
+      int high = toIndex - 1;
+
+      while (low <= high){
+          int middle = low + (high - low) / 2;
+         if (comparator.compare(fromArray[middle], aValue) == 0){
+            return middle;
+         }else if(comparator.compare(fromArray[middle], aValue) < 0){
+            low = middle - 1;
+         }else{
+            high = middle - 1;
+         }
+          
+      }
       return -1;
    }
 
