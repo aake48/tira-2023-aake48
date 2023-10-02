@@ -92,6 +92,7 @@ Tässä tehtävässä opin tekemään puolitushakualgoritmin. Koin että algorit
 
 Testien tuloksien muuttaminen käyriksi:
 
+![Hakuaika](TIRA_TASK02_Hakuaika.png)
 ![Hakuaika](TIRA_TASK03_Hakuaika.png)
 ![Lajitteluaika](TIRA_TASK03_Lajitteluaika.png)
 ![Tayttoaika](TIRA_TASK03_Tayttoaika.png)
