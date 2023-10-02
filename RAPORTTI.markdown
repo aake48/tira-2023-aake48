@@ -93,16 +93,13 @@ Tässä tehtävässä opin tekemään puolitushakualgoritmin. Koin että algorit
 Testien tuloksien muuttaminen käyriksi:
 
 ![Hakuaika](TIRA_TASK02_Hakuaika.png)
+Ylhäällä oleva käyrä on TASK02 tehty käyrä, jossa näkyy lineaarisen haun hakuaika
 ![Hakuaika](TIRA_TASK03_Hakuaika.png)
+Tässä taas on puolitushaun hakuaika. Kuvista voidaan nähdä että puolitushaku toimii paljon nopeammin myös isommilla tietomäärillä.
 ![Lajitteluaika](TIRA_TASK03_Lajitteluaika.png)
 ![Tayttoaika](TIRA_TASK03_Tayttoaika.png)
 
-* Mikä on tässä nopeassa haussa keskimäärin suoritusaika suhteessa ensimmäiseen hakuun?
-	Kun verrataan testejä aikaisemman tehtävän ja tämän tehtävän testejä, voidaan huomata että n:n eli tietomäärän ollessa 32000 oli hakuaika
-	1. Haussa 5065 mikrosekuntia
-	2. Haussa (nopeammassa) 53 mikrosekuntia 
-	
-	Tässä tapauksessa hakuaika on siis noin 95 kertaa nopeampi. 
+
 
 TIRA Codersissa tehdyt havainnot:
 
@@ -123,10 +120,24 @@ Aalliniemi Muhammed Tayyib
 Search took 0 ms
 Fast search took 0 ms
 
+* Mikä on tässä nopeassa haussa keskimäärin suoritusaika suhteessa ensimmäiseen hakuun?
+	1. Haussa 75ms
+	2. Haussa (nopeammassa) 0ms
+	
+	Koska toisessa haussa ei saada aikaa mikrosekunteina, voidaan todeta että puolitushaku on ainakin 75 kertaa nopeampi kuin lineaarinen haku.
 
-Ensimmäinen haku on tehty listan lopusta, toinen haku keskikohdasta ja viimeinen listan alusta, tiedostona on käytetty 50000 koodaria sisältävää listaa. Voidaan huomata, että kun haetaan koodaria lineaarisesti, niin aika joka menee hakemiseen on suurempi listan loppupäässä verrattuna alkupäähän. Tämä johtuu siitä että haku tehdään lineaarisesti, eli käydään alkiot läpi yksi kerrallaan, jolloin listan alussa olevat koodarit löytyvät nopeammin kuin listan loppussa olevat koodarit. Toisaalta taas kun tehdään puolitushaku (binary search), on kaikissa "Fast search" 0 ms. Puolitushaku toimii suurilla tietomäärillä paljon nopeammin kun jokaista yksittäistä alkiota ei käydä läpi, vaan jokaisella haku kerralla aineisto puolitetaan.
+* Kokeile hakea molemmilla tavoilla koodareita myös listan alusta. Mitä huomaat?
+* Miksi jompi kumpi haku on nopeampi, ja onko sillä väliä haetaanko aineiston alusta vai lopusta? Pohdi ja perustele.
 
-Pienemmillä tietomäärillä hakuajat eivät eroa paljoa, jolloin ei periaatteessa ole väliä kumpaa hakualgoritmia käyttää. Toisaalta pitää ottaa huomioon, että puolitushaun toimiminen vaatii sen, että lista/tiedosto tmv. on järjestelty, kun taas lineaarinen haku toimii millä tahansa järjestyksellä, mutta tietomäärän kasvaessa sen suoritusaika kasvaa myös.
+Ensimmäinen haku on tehty listan lopusta, toinen haku keskikohdasta ja viimeinen listan alusta, tiedostona on käytetty 50000 koodaria sisältävää listaa. Voidaan huomata, että kun haetaan koodaria lineaarisesti, niin aika joka menee hakemiseen on suurempi listan loppupäässä verrattuna alkupäähän. Tämä johtuu siitä että haku tehdään lineaarisesti, eli käydään alkiot läpi yksi kerrallaan, jolloin listan alussa olevat koodarit löytyvät nopeammin kuin listan loppussa olevat koodarit (tässä tapauksessa on aineisto lajiteltu jonka takia näin käy). Toisaalta taas kun tehdään puolitushaku (binary search), on kaikissa "Fast search" 0 ms. Puolitushaku toimii suurilla tietomäärillä paljon nopeammin kun jokaista yksittäistä alkiota ei käydä läpi, vaan jokaisella haku kerralla hakualue jaetaan kahteen osaan.
+
+Pienemmillä tietomäärillä hakuajat eivät eroa paljoa, jolloin ei periaatteessa ole väliä kumpaa hakualgoritmia käyttää. Toisaalta pitää ottaa huomioon, että puolitushaun toimiminen vaatii sen, että lista on järjestelty, kun taas lineaarinen haku toimii millä tahansa järjestyksellä, mutta tietomäärän kasvaessa sen suoritusaika kasvaa myös. Eli periaatteessa jos tietomäärä on suuri ja se on lajiteltu, on silloin aikatehokkaampaa käyttää puolitushakua.
+
+
+
+
+Lineaarisen haun aikakompleksisuusluokka on big-O notaatiolla O(n), jossa n = tiedon määrä.
+Puolitushaun aikakompleksisuusluokka on big-O notaatiolla O(log n) jossa n = tiedon määrä.
 
 
 
