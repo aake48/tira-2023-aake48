@@ -67,18 +67,18 @@ Pätkä testailun tuloksista:
      PhoneBookArray: Sorting took 620 ms
      PhoneBookArray: Sorting took 2625 ms
 
-Kun aikaa menee 600 ms on vaihto tehty Full name -> Coder name
-Kun aikaa menee +2000ms, niin vaihto on tehty Coder name -> Full name
+Kun aikaa menee ~600 ms on vaihto tehty Full name -> Coder name
+Kun aikaa menee ~2500ms, niin vaihto on tehty Coder name -> Full name
 
 Syy on siinä, että monella koodarilla saattaa olla sama Coder name, jolloin osa tiedoista on jo oikeassa paikassa, jolloin lajittelussa menee vähemmän aikaa ja päinvastoin koska koodareiden koko nimet eroavat paljon, joutuu lajitteluun käyttämään myös enemmän aikaa, kun pienempi osa tiedoista on oikealla kohdalla.
 
 Aikatehokkuus testien tulokset lineaarisessa haku algoritmissä sekä add metodissa:
 x-akselilla on tietomäärä, y-akselilla aika.
 
-[Hakuaika](TIRA_TASK02_Hakuaika.png)
-[Tayttoaika](TIRA_TASK02_Tayttoaika.png)
+![Hakuaika](TIRA_TASK02_Hakuaika.png)
+![Tayttoaika](TIRA_TASK02_Tayttoaika.png)
 
-Käyristä voi nähdä, että ne ovat lineaarisesti kasvavia, eli tietomäärän kasvaessa, kasvaa myös suoritusaika
+Käyristä voi nähdä, että ne ovat lineaarisesti kasvavia, eli tietomäärän kasvaessa, kasvaa myös suoritusaika lineaarisesti
 
 * Miksi toteutettuja hakualgoritmeja kutsutaan lineaarisiksi?
 	Hakualgoritmeja kutsutaan lineaarisiksi, koska niiden suoritusaika kasvaa lineaarisesti suhteessa tietomäärään jota käsitellään.
@@ -87,6 +87,47 @@ Käyristä voi nähdä, että ne ovat lineaarisesti kasvavia, eli tietomäärän
 	Lineaarisilla algoritmeilla aikakompleksisuus luokka big-O notaatiolla esiteltynä on O(N)
 
 ## 03-TASK
+
+Tässä tehtävässä opin tekemään puolitushakualgoritmin. Koin että algoritmin toiminta oli helppo ymmärtää luentovideoiden ja cs.usfca.edu sivun animaation myötä.
+
+Testien tuloksien muuttaminen käyriksi:
+
+![Hakuaika](TIRA_TASK03_Hakuaika.png)
+![Lajitteluaika](TIRA_TASK03_Lajitteluaika.png)
+![Tayttoaika](TIRA_TASK03_Tayttoaika.png)
+
+* Mikä on tässä nopeassa haussa keskimäärin suoritusaika suhteessa ensimmäiseen hakuun?
+	Kun verrataan testejä aikaisemman tehtävän ja tämän tehtävän testejä, voidaan huomata että n:n eli tietomäärän ollessa 32000 oli hakuaika
+	1. Haussa 5065 mikrosekuntia
+	2. Haussa (nopeammassa) 53 mikrosekuntia 
+	
+	Tässä tapauksessa hakuaika on siis noin 95 kertaa nopeampi. 
+
+TIRA Codersissa tehdyt havainnot:
+
+Log viewin tulokset:
+
+Översti Aiden-Jack Arnab
+
+Search took 75ms
+Fast search took 0 ms
+
+Källi Agnetha Bailie
+
+Search took 23ms
+Fast search took 0ms
+
+Aalliniemi Muhammed Tayyib
+
+Search took 0 ms
+Fast search took 0 ms
+
+
+Ensimmäinen haku on tehty listan lopusta, toinen haku keskikohdasta ja viimeinen listan alusta, tiedostona on käytetty 50000 koodaria sisältävää listaa. Voidaan huomata, että kun haetaan koodaria lineaarisesti, niin aika joka menee hakemiseen on suurempi listan loppupäässä verrattuna alkupäähän. Tämä johtuu siitä että haku tehdään lineaarisesti, eli käydään alkiot läpi yksi kerrallaan, jolloin listan alussa olevat koodarit löytyvät nopeammin kuin listan loppussa olevat koodarit. Toisaalta taas kun tehdään puolitushaku (binary search), on kaikissa "Fast search" 0 ms. Puolitushaku toimii suurilla tietomäärillä paljon nopeammin kun jokaista yksittäistä alkiota ei käydä läpi, vaan jokaisella haku kerralla aineisto puolitetaan.
+
+Pienemmillä tietomäärillä hakuajat eivät eroa paljoa, jolloin ei periaatteessa ole väliä kumpaa hakualgoritmia käyttää. Toisaalta pitää ottaa huomioon, että puolitushaun toimiminen vaatii sen, että lista/tiedosto tmv. on järjestelty, kun taas lineaarinen haku toimii millä tahansa järjestyksellä, mutta tietomäärän kasvaessa sen suoritusaika kasvaa myös.
+
+
 
 ## 04-TASK
 
