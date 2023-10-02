@@ -74,7 +74,7 @@ public class SimpleContainer<E extends Comparable<E>> implements TIRAContainer<E
 	public int indexOf(E element, Comparator<E> usingComparator) {
 
 		if (isSorted()){
-			Algorithms.binarySearch(element, array, 0, count, usingComparator);
+			return Algorithms.binarySearch(element, array, 0, count, usingComparator);
 		}else{
 		for (int currentIndex = 0; currentIndex < count; currentIndex++) {
 			if (array[currentIndex].compareTo(element) == 0) {

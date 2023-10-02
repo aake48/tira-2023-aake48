@@ -145,7 +145,7 @@ public class Algorithms {
          if (comparator.compare(fromArray[middle], aValue) == 0){
             return middle;
          }else if(comparator.compare(fromArray[middle], aValue) < 0){
-            low = middle - 1;
+            low = middle + 1;
          }else{
             high = middle - 1;
          }
