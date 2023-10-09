@@ -49,21 +49,82 @@ public class ParenthesisChecker {
     * @throws StackAllocationException If the stack cannot be allocated or reallocated if necessary.
     */
     public static int checkParentheses(StackInterface<Character> stack, String fromString) throws ParenthesesException {
-      // TODO:
-      // for each character in the input string
-      //   if in between of quotes
-      //      ignore this character (but count column numbers)
-      //   if character is an opening parenthesis -- one of "([{"
-      //      push it into the stack (check for failure and throw an exception if so)
-      //   else if character is a closing parenthesis -- one of ")]}"
-      //      pop the latest opening parenthesis from the stack
-      //      if the popped item is null
-      //         throw an exception, there are too many closing parentheses 
-      //      check the popped opening parenthesis against the closing parenthesis read from the string
-      //      if they do not match -- opening was { but closing was ], for example.
-      //         throw an exception, wrong kind of parenthesis were in the text (e.g. "asfa ( asdf } sadf")
-      // if the stack is not empty after all the characters have been handled
-      //   throw an exception since the string has more opening than closing parentheses.
-      return 0;
+      
+      int column = 1;
+      int row = 1;
+      int parentheses = 0;
+      Character openingParenthesis = null;
+      Character poppedParenthesis;
+      boolean quoteStatus = false;
+         // TODO:
+         // for each character in the input string
+
+         for (int index = 0; index < fromString.length(); index++){
+            char currentCharacter = fromString.charAt(index);
+            //
+            column++;
+
+         //   if in between of quotes
+         //      ignore this character (but count column numbers)
+            if (currentCharacter == '"'){
+               
+               quoteStatus = !quoteStatus;             
+            }
+            
+            if (quoteStatus == true){
+              
+               continue;
+            }
+            
+            if (currentCharacter == '\n'){
+               row++;
+               column = 1;
+            }            
+         //   if character is an opening parenthesis -- one of "([{"
+         //      push it into the stack (check for failure and throw an exception if so)
+            if (currentCharacter == '[' || currentCharacter == '{' || currentCharacter == '('){
+               openingParenthesis = currentCharacter;
+               stack.push(currentCharacter); // REMEMBER TO CHECK FOR FAILURE AND THROW AN EXPECTION
+               parentheses++;
+              
+         //   else if character is a closing parenthesis -- one of ")]}"
+         //      pop the latest opening parenthesis from the stack               
+            }else if (currentCharacter == ']' || currentCharacter == '}' || currentCharacter == ')'){
+               parentheses++;
+             
+               poppedParenthesis = stack.pop();
+
+         //      check the popped opening parenthesis against the closing parenthesis read from the string
+         //      if they do not match -- opening was { but closing was ], for example.
+         //         throw an exception, wrong kind of parenthesis were in the text (e.g. "asfa ( asdf } sadf")
+
+         //TÄSSÄ VIRHE, MENEE simpleInCorrect testi läpi jos käytössä mutta simpleCorrect ei mene ja toisinpäin. 
+            if (!openingParenthesis.equals(poppedParenthesis)){
+               throw new ParenthesesException(fromString, row, column, currentCharacter);
+            }
+         //      if the popped item is null
+         //         throw an exception, there are too many closing parentheses 
+               if(poppedParenthesis == null){
+                  throw new ParenthesesException(fromString, row, column, currentCharacter);
+                  //throw new ParenthesesException("Invalid parenthesis in file", ParenthesesException.TOO_MANY_CLOSING_PARENTHESES)
+               }
+               
+            }
+
+         }
+
+
+         // if the stack is not empty after all the characters have been handled
+         //   throw an exception since the string has more opening than closing parentheses.
+
+         if (!stack.isEmpty()){
+           //????? throw new ParenthesesException("Invalid parenthesis in file", ParenthesesException.TOO_MANY_CLOSING_PARENTHESES)
+         }
+
+
+         //      check the popped opening parenthesis against the closing parenthesis read from the string
+         //      if they do not match -- opening was { but closing was ], for example.
+         //         throw an exception, wrong kind of parenthesis were in the text (e.g. "asfa ( asdf } sadf")
+      return parentheses;
    }
 }

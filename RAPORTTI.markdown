@@ -45,6 +45,20 @@ Tehtävässä opin muodostamaan yksinkertaisen lajittelualgoritmin. Helppoa teht
 * Mikä on toteuttamasi lajittelualgortmin aikakompleksisuusluokka?
 
 Lajittelualgoritmin aikakompleksisuusluokka on neliöllinen eli O(n^2). Eli tietomäärän kasvaessa tarpeeksi, kasvaa algoritmin suoritusaika jopa eksponentiaalisesti. Algoritmi toimii sujuvasti pienien tietomäärien kanssa ja tällöin suoritusaika on lineaarinen, eikä se vaadi lisämuistia tehden siitä hyvän vaihtoehdon jos tietomäärät ovat pieniä. Jos tietomäärät ovat suuria, menee algoritmilla paljon aikaa lajitteluun eikä tämän takia välttämättä sovellu hyvin käyttöön niiden kanssa.
+``
+	public static <T extends Comparable<T>> void insertionSort(T[] array, int fromIndex, int toIndex) {
+      if (array != null && fromIndex >= 0 && toIndex <= array.length){
+      for (int currentIndex = fromIndex; currentIndex < toIndex; currentIndex++) {
+         T currentElement = array[currentIndex];
+         int previousIndex = currentIndex - 1;
+
+         while (previousIndex >= fromIndex && array[previousIndex].compareTo(currentElement) > 0) {
+            swap(array, previousIndex, previousIndex + 1);
+            previousIndex--;
+         }
+      }
+   }
+}``
 
 * Mikä on toteuttamasi reverse -algoritmin aikakompleksisuusluokka?
 
@@ -81,7 +95,7 @@ x-akselilla on tietomäärä, y-akselilla aika.
 Käyristä voi nähdä, että ne ovat lineaarisesti kasvavia, eli tietomäärän kasvaessa, kasvaa myös suoritusaika lineaarisesti
 
 * Miksi toteutettuja hakualgoritmeja kutsutaan lineaarisiksi?
-	Hakualgoritmeja kutsutaan lineaarisiksi, koska niiden suoritusaika kasvaa lineaarisesti suhteessa tietomäärään jota käsitellään.
+	Hakualgoritmeja kutsutaan lineaarisiksi, koska niiden suoritusaika kasvaa lineaarisesti suhteessa tietomäärään jota käsitellään. Ns. "optimiin" lineaariseen käyrään ei päästä, johtuen siitä ettei prosessori käytä kaikkea tehoansa prosessin suorittamiseen, toisaalta myös käyttöjärjestelmä voi keskeyttää säikeen (thread) suoritusvuoron antaakseen sen jollekkin toiselle säikeelle. Myös tietokoneen muistilla voi olla vaikutusta asiaan. 
 
 * Mikä niiden aikakompleksisuusluokka on big-O -notaatiolla esiteltynä?
 	Lineaarisilla algoritmeilla aikakompleksisuus luokka big-O notaatiolla esiteltynä on O(N)
