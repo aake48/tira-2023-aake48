@@ -20,7 +20,6 @@ public interface QueueInterface<E> {
     * @throws NullPointerException If the element is null.
     */
    public void enqueue(E element) throws OutOfMemoryError, NullPointerException;
-
    /**
     * Removes an element from the queue.
     * @return The element from the head of the queue.

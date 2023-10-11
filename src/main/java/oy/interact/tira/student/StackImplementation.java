@@ -18,7 +18,7 @@ public class StackImplementation<E> implements StackInterface<E> {
 
     public StackImplementation(int newCapacity){
         if (newCapacity < 0){
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException("Error: Can't set capacity under 0");
         }
         this.capacity = newCapacity;
         itemArray = new Object[capacity];
@@ -48,7 +48,11 @@ public class StackImplementation<E> implements StackInterface<E> {
         }
 
         if (size() == capacity){
-            reallocate(capacity * 2);
+            try{
+                reallocate(capacity * 2);
+            }catch (Exception e){
+                throw new OutOfMemoryError("Out of memory");
+            }
         }
         currentIndex++;
         itemArray[currentIndex] = element;

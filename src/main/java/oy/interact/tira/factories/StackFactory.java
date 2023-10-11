@@ -1,6 +1,6 @@
 package oy.interact.tira.factories;
 
-import oy.interact.tira.NotYetImplementedException;
+
 import oy.interact.tira.student.StackImplementation;
 import oy.interact.tira.util.StackInterface;
 

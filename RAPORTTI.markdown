@@ -157,6 +157,15 @@ Puolitushaun aikakompleksisuusluokka on big-O notaatiolla O(log n) jossa n = tie
 
 ## 04-TASK
 
+* Mitä opin tehtävän tekemisessä
+Opin muodostamaan pinotietorakenteen ja hyödyntämään sitä rakenteellisen tekstin oikeellisuuden tarkistuksessa. Vaikeaa mielestäni oli merkkijonon tarkistuksen logiikan luominen sekä aluksi StackImplementation luokan luominen, mutta materiaaleja sekä demoa kertaamalla ymmärsin lopuksi asian.
+
+* Toteutuksen aikakompleksisuusvaatiumukset
+Toteutukseni vastaa alussa esiteltyjä aikakompleksisuusvaatimuksia, koska en käytä toistorakenteita missään metodissa, jossa aikakompleksisuusluokka on O(1) (poikkeuksena push(), jossa reallokoidessa on pakko käyttää)
+
+* Lainausmerkit väärin, onko algoritmi oikeellinen?
+Tällä hetkellä algoritmi ei toimi oikeellisesti lainausmerkkien kanssa, koska algoritmi "olettaa" että lainausmerkkejä on aina parillinen määrä jonka takia siinä ei ole minkäänlaista tarkistusta tai virheenkäsittelyä.
+Tapauksessa jossa lainausmerkkejä on liikaa esim. pelkästään 1 lainausmerkki tiedoston alussa, ja toista merkkiä ei ollenkaan, ei tiedostosta huomioida yhtäkään merkkiä ensimmäisen lainausmerkin jälkeen koska algoritmi odottaa toista lainausmerkkiä. Algoritmiin pitäisi siis luoda virheenkäsittely ja tarkistukset tällaista tilannetta varten.
 ## 05-TASK
 
 ## 06-TASK
