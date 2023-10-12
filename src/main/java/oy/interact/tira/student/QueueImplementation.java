@@ -40,11 +40,11 @@ public class QueueImplementation<E> implements QueueInterface<E> {
                 oldIndex = 0;
             }
             newArray[tail++] = itemArray[oldIndex++];
-            
             counter--;
         }
         itemArray = newArray;
         count = tail - 1;
+        capacity = newCapacity;
 
 
     }
@@ -56,7 +56,7 @@ public class QueueImplementation<E> implements QueueInterface<E> {
      */
     @Override
     public int capacity() {
-        return this.capacity;
+        return capacity;
     }
 
     /**
@@ -85,7 +85,8 @@ public class QueueImplementation<E> implements QueueInterface<E> {
         if (tail >= itemArray.length && head > 0) {
             tail = 0;
         }
-        itemArray[tail++] = element;
+        itemArray[tail] = element;
+        tail++;
         count++;
 
     }
@@ -170,6 +171,23 @@ public class QueueImplementation<E> implements QueueInterface<E> {
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
+        int counter = count;
+        int index = head;
+
+        builder.append("[");
+        while (counter > 0){
+            builder.append(itemArray[index]);
+            if (counter > 1){
+                builder.append(", ");
+            }
+            index++;
+            counter--;
+            if (index >= itemArray.length){
+                index = 0;
+            }
+        }
+
+        builder.append("]");
         return builder.toString();
     }
 
