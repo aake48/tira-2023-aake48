@@ -99,7 +99,7 @@ public class ParenthesisChecker {
          }
          // if character is an opening parenthesis -- one of "([{"
          // push it into the stack (check for failure and throw an exception if so)
-         if (currentCharacter == '[' || currentCharacter == '{' || currentCharacter == '(') {
+         if (currentCharacter.equals('[') || currentCharacter.equals('{') || currentCharacter.equals('(')) {
             // openingParenthesis = currentCharacter;
             try {
                stack.push(currentCharacter);
@@ -111,7 +111,7 @@ public class ParenthesisChecker {
 
             // else if character is a closing parenthesis -- one of ")]}"
             // pop the latest opening parenthesis from the stack
-         } else if (currentCharacter == ']' || currentCharacter == '}' || currentCharacter == ')') {
+         } else if (currentCharacter.equals(']') || currentCharacter.equals('}') || currentCharacter.equals(')')) {
             parentheses++;
 
             // if the popped item is null
@@ -129,9 +129,9 @@ public class ParenthesisChecker {
             // throw an exception, wrong kind of parenthesis were in the text (e.g. "asfa (
             // asdf } sadf")
 
-            if (poppedParenthesis == '[' && currentCharacter != ']'
-                  || poppedParenthesis == '(' && currentCharacter != ')'
-                  || poppedParenthesis == '{' && currentCharacter != '}') {
+            if (poppedParenthesis.equals('[') && !currentCharacter.equals(']')
+                  || poppedParenthesis.equals('(') && !currentCharacter.equals(')')
+                  || poppedParenthesis.equals('{') && !currentCharacter.equals('}')) {
                throw new ParenthesesException("Wrong kind of parenthesis were in the text", line, column - 1,
                      ParenthesesException.PARENTHESES_IN_WRONG_ORDER);
             }

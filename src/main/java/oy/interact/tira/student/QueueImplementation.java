@@ -43,7 +43,7 @@ public class QueueImplementation<E> implements QueueInterface<E> {
             counter--;
         }
         itemArray = newArray;
-        count = tail - 1;
+        count = tail;
         capacity = newCapacity;
 
 
@@ -108,6 +108,10 @@ public class QueueImplementation<E> implements QueueInterface<E> {
         itemArray[head] = null;
         head++;
         count--;
+
+        if (head == itemArray.length){
+            head = 0;
+        }
 
         return element;
     }
