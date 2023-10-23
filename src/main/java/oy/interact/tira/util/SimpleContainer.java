@@ -54,6 +54,9 @@ public class SimpleContainer<E extends Comparable<E>> implements TIRAContainer<E
 
 	@Override
 	public E get(int index) throws IndexOutOfBoundsException {
+		if (index > array.length || index < 0){
+			throw new IndexOutOfBoundsException("Index needs to be higher than 0 and lower than array length");
+		}
 		return array[index];
 	}
 
@@ -66,7 +69,7 @@ public class SimpleContainer<E extends Comparable<E>> implements TIRAContainer<E
 			}
 		}
 	}
-		return null;
+		throw new IllegalArgumentException("Element is null");
 
 	}
 

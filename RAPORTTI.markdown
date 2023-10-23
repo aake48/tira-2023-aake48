@@ -168,6 +168,15 @@ Tällä hetkellä algoritmi ei toimi oikeellisesti lainausmerkkien kanssa, koska
 Tapauksessa jossa lainausmerkkejä on liikaa esim. pelkästään 1 lainausmerkki tiedoston alussa, ja toista merkkiä ei ollenkaan, ei tiedostosta huomioida yhtäkään merkkiä ensimmäisen lainausmerkin jälkeen koska algoritmi odottaa toista lainausmerkkiä. Algoritmiin pitäisi siis luoda virheenkäsittely ja tarkistukset tällaista tilannetta varten.
 ## 05-TASK
 
+* Mitä opin tehtävän tekemisessä
+Tehtävässä opin tekemään jono tietorakenteen, jonka sisäisenä tietorakenteena toimii taulukko. Opin myös teoriassa miten linkitetty lista toteutus toimii, vaikken sitä tässä tehtävässä toteuttanut. Koin jono tietorakenteen perusidean helpoksi ymmärtää, kun sitä mallasi paperilla, mutta tietorakenteen toteuttaminen koodiin oli kuitenkin hieman vaikeaa.
+
+* Missä asioissa linkitetty lista on parempi kuin taulukkopohjainen toteutus, muistin käytön (muistikompleksisuus) ja aikatehokkuuden (aikakompleksisuus) suhteen? Ja missä asioissa taas taulukkopohjainen toteutus on parempi?
+
+Linkitettyä listaa ei tarvitse reallokoida, koska tässä toteutuksessa ei ole taulukkoa joka täyttyisi. Aina kun listaan lisätään uusi elementti, luodaan vain uusi node ja linkitetään se. Tällöin aikakompleksisuus on O(1).
+Taulukon täytyttyä, pitää taulukkoa reallokoida, jolloin toteutuksen aikakompleksisuus nousee O(1) -> O(n).
+
+Kun taulukosta haetaan tiettyä elementtiä indeksillä, on aikakompleksisuus O(1), kun taas linkitetyssä listassa pitää listaa käydä silmukalla läpi, jolloin aikakompleksisuus on O(n). Taulukossa elementit ovat yhtäjaksoisella muistialueella RAM-muistissa jolloin taulukkoa on nopea käsitellä, kun taas linkitetyssä listassa tilanne on päinvastainen: elementit ovat hajallaan RAM-muistissa. Nykyaikaiset prosessit ja muistiarkkitehtuurit suosii taulukoiden käyttöä, koska esim. lukeminen taulukosta on paljon nopeampaa kuin linkitetystä listasta
 ## 06-TASK
 
 ## 07-TASK
