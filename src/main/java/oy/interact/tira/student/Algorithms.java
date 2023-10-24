@@ -66,7 +66,6 @@ public class Algorithms {
 
    public static <T> void insertionSort(T[] array, int fromIndex, int toIndex, Comparator<T> comparator) {
 
-      if (array != null && fromIndex >= 0 && toIndex < array.length && comparator != null) {
          for (int currentIndex = fromIndex; currentIndex < toIndex; currentIndex++) {
             // Storing the element in currentIndex for comparing
             T currentElement = array[currentIndex];
@@ -83,7 +82,7 @@ public class Algorithms {
                previousIndex--;
             }
          }
-      }
+      
    }
 
    ///////////////////////////////////////////
@@ -154,27 +153,22 @@ public class Algorithms {
    }
 
    public static <E extends Comparable<E>> void fastSort(E[] array) {
-      quickSort(array, 0, array.length - 1);
+      //quickSort(array, 0, array.length - 1, Comparator.naturalOrder());
+      heapSort(array, Comparator.naturalOrder());
    }
 
    public static <E> void fastSort(E[] array, Comparator<E> comparator) {
-      quickSort(array, comparator);
+      //quickSort(array, 0, array.length - 1, comparator);
+      heapSort(array, comparator);
    }
 
    public static <E> void fastSort(E[] array, int fromIndex, int toIndex, Comparator<E> comparator) {
-      quickSort(array, fromIndex, toIndex - 1, comparator);
+      //quickSort(array, fromIndex, toIndex, comparator);
+      heapSort(array, fromIndex, toIndex, comparator);
 
    }
 
    //////// QUICKSORT ////////
-
-   public static <E extends Comparable<E>> void quickSort(E[] array, int low, int high) {
-      if (low < high) {
-         int partitionIndex = partition(array, low, high);
-         quickSort(array, low, partitionIndex - 1);
-         quickSort(array, partitionIndex + 1, high);
-      }
-   }
 
    public static <E> void quickSort(E[] array, Comparator<E> comparator) {
       quickSort(array, 0, array.length, comparator);
@@ -183,65 +177,36 @@ public class Algorithms {
    public static <E> void quickSort(E[] array, int low, int high, Comparator<E> comparator) {
       if (low < high) {
          int partitionIndex = partition(array, low, high, comparator);
-         quickSort(array, low, partitionIndex - 1, comparator);
+         quickSort(array, low, partitionIndex, comparator);
          quickSort(array, partitionIndex + 1, high, comparator);
       }
-   }
-
-   private static <E extends Comparable<E>> int partition(E[] array, int low, int high) {
-
-      E pivot = array[high];
-
-      int leftIndex = low - 1;
-      int rightIndex = high + 1;
-
-      while (leftIndex < rightIndex) {
-         do {
-            leftIndex++;
-         } while (array[leftIndex].compareTo(pivot) < 0);
-
-         do {
-            rightIndex--;
-         } while (array[rightIndex].compareTo(pivot) > 0);
-
-         if (leftIndex < rightIndex) {
-            swap(array, leftIndex, rightIndex);
-         }
-
-      }
-      swap(array, high, rightIndex);
-      return rightIndex;
    }
 
    private static <E> int partition(E[] array, int low, int high, Comparator<E> comparator) {
 
 
-       int middle = low + (high - low) / 2;
-
-     /*  if (comparator.compare(array[middle], array[low]) < 0){
-         swap (array, middle, low);
-      }
-      if (comparator.compare(array[low], array[high]) < 0){
-         swap (array, low, high);
-      }
-      if (comparator.compare(array[middle], array[high]) < 0){
-         swap(array, middle, high);
-      }  */
+      int middle = low + (high - low) / 2;
+      
+      //Pivot is the value in the middle of the array
       E pivot = array[middle];
 
       int leftIndex = low - 1;
       int rightIndex = high + 1;
-
       while (true) {
+
+         //Move from the left side of the array to the right as long as the value
+         //is less than pivot
          do {
             leftIndex++;
          } while (comparator.compare(array[leftIndex], pivot) < 0);
 
+         //Move from the right side of the array to the left as long as the value
+         //is more than pivot
          do {
             rightIndex--;
          } while (comparator.compare(array[rightIndex], pivot) > 0);
 
-
+         //If leftIndex and rightIndex cross, return rightIndex (pivot is in correct position)
          if (leftIndex >= rightIndex){
             return rightIndex;
          }
@@ -252,4 +217,71 @@ public class Algorithms {
       }
    }
 
+   public static <E> void heapSort(E[] array, Comparator<E> comparator){
+      heapSort(array, 0, array.length, comparator);
+   }
+
+   public static <E> void heapSort(E[] array, int fromIndex, int toIndex, Comparator<E> comparator){
+         heapify(array, toIndex - 1, comparator);
+
+      toIndex = toIndex - 1;
+
+      while (toIndex > 0){
+         swap (array, toIndex, 0);
+         toIndex = toIndex - 1;
+         siftDown(array, 0, toIndex, comparator);
+      }
+
+
+   }
+
+   private static <E> void heapify (E[] array, int end, Comparator<E> comparator){
+
+      int start = parent(end);
+
+      while (start >= 0){
+         siftDown(array, start, end, comparator);
+         start--;
+      }
+
+   }
+
+   private static <E> void siftDown (E[] array, int startIndex, int endIndex, Comparator<E> comparator){
+      int root = startIndex;
+      int child;
+      int swap;
+      while(leftChild(root) <= endIndex){
+         child = leftChild(root);
+         swap = root;
+
+         if (comparator.compare(array[swap], array[child]) < 0){
+            swap = child;
+         }
+
+         if (child + 1 <= endIndex && comparator.compare(array[swap], array[child + 1]) < 0){
+            swap = child + 1;
+         }
+
+         if (swap == root){
+            return;
+         }else {
+            swap(array, root, swap);
+            root = swap;
+         }
+      }
+
+      
+   }
+
+   private static int parent(int i){
+      return (int)Math.floor((i-1) / 2);
+   }
+
+   private static int leftChild(int i){
+      return (2 * i + 1);
+   }
+
+   private static int rightChild(int i){
+      return (2 * i + 2);
+   }
 }
