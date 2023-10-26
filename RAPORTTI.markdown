@@ -179,6 +179,31 @@ Taulukon täytyttyä, pitää taulukkoa reallokoida, jolloin toteutuksen aikakom
 Kun taulukosta haetaan tiettyä elementtiä indeksillä, on aikakompleksisuus O(1), kun taas linkitetyssä listassa pitää listaa käydä silmukalla läpi, jolloin aikakompleksisuus on O(n). Taulukossa elementit ovat yhtäjaksoisella muistialueella RAM-muistissa jolloin taulukkoa on nopea käsitellä, kun taas linkitetyssä listassa tilanne on päinvastainen: elementit ovat hajallaan RAM-muistissa. Nykyaikaiset prosessit ja muistiarkkitehtuurit suosii taulukoiden käyttöä, koska esim. lukeminen taulukosta on paljon nopeampaa kuin linkitetystä listasta
 ## 06-TASK
 
+* Mitä opin tehtävän tekemisessä
+Opin muodostamaan kaksi erilaista nopeaa lajittelualgoritmia, quicksortin ja heapsortin. Mielestäni quicksort oli helpompi tehdä, kun taas heapsort oli yksinkertainen paperilla, mutta koodin muodostamisessa ilmeni hieman vaikeuksia. 
+
+![Hidas_lajittelu](task06_insertionsort_lajitteluaika.png)
+
+![Quicksort](task06_quickSort_lajitteluaika.png)
+
+![Heapsort](task06_heapSort_lajitteluaika.png)
+
+
+-----------------------------------------------
+         QUICKSORT	HEAPSORT	   INSERTIONSORT
+         ms/element	ms/element	ms/element
+Count
+100          0,23		    0,27		 0,32
+1000         0,018		0,021		0,097
+5000         0,007		0,009		0,232
+10000        0,004		0,007		0,508
+50000        0,007		0,01		5,703
+100000       0,007		0,011		7,821
+1000000      0,011		0,018
+2000000      0,011		0,021
+-----------------------------------------------
+
+
 ## 07-TASK
 
 ## 08-TASK
