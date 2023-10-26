@@ -1,56 +1,49 @@
 package oy.interact.tira.student;
 
-
 import oy.interact.tira.util.StackInterface;
 
 public class StackImplementation<E> implements StackInterface<E> {
 
-    private Object [] itemArray = null;
+    private Object[] itemArray = null;
     private static final int DEFAULT_STACK_SIZE = 10;
-    private int capacity = DEFAULT_STACK_SIZE;
     private int currentIndex = -1;
 
-    //Constructor
+    // Constructors
 
-    public StackImplementation(){
+    public StackImplementation() {
         this(DEFAULT_STACK_SIZE);
     }
 
-    public StackImplementation(int newCapacity){
-        if (newCapacity < 0){
+    public StackImplementation(int capacity) {
+        if (capacity < 0) {
             throw new IndexOutOfBoundsException("Error: Can't set capacity under 0");
         }
-        this.capacity = newCapacity;
         itemArray = new Object[capacity];
     }
 
+    private void reallocate(int newCapacity) {
 
-    private void reallocate(int newCapacity){
-        
-            Object [] newArray = new Object[newCapacity];
-            for (int index = 0; index <= currentIndex; index++){
-                newArray[index] = itemArray[index];
-            }
-            itemArray = newArray;
-            capacity = newCapacity;
-        
+        Object[] newArray = new Object[newCapacity];
+        for (int index = 0; index <= currentIndex; index++) {
+            newArray[index] = itemArray[index];
+        }
+        itemArray = newArray;
     }
 
     @Override
     public int capacity() {
-        return this.capacity;
+        return itemArray.length;
     }
 
     @Override
     public void push(E element) throws OutOfMemoryError, NullPointerException {
-        if (element == null){
+        if (element == null) {
             throw new NullPointerException("Error: Element is null");
         }
-
-        if (size() == capacity){
-            try{
-                reallocate(capacity * 2);
-            }catch (Exception e){
+        if (size() == capacity()) {
+            try {
+                reallocate(itemArray.length * 2);
+            } catch (Exception e) {
                 throw new OutOfMemoryError("Out of memory");
             }
         }
@@ -62,7 +55,7 @@ public class StackImplementation<E> implements StackInterface<E> {
     @SuppressWarnings("unchecked")
     @Override
     public E pop() throws IllegalStateException {
-        if (isEmpty()){
+        if (isEmpty()) {
             throw new IllegalStateException("Stack is empty");
         }
         E removedElement = (E) itemArray[currentIndex];
@@ -70,13 +63,14 @@ public class StackImplementation<E> implements StackInterface<E> {
         currentIndex--;
         return removedElement;
     }
+
     @SuppressWarnings("unchecked")
     @Override
     public E peek() throws IllegalStateException {
-            if (isEmpty()){
+        if (isEmpty()) {
             throw new IllegalStateException("Stack is empty");
         }
-        return (E)itemArray[currentIndex];
+        return (E) itemArray[currentIndex];
     }
 
     @Override
@@ -86,7 +80,7 @@ public class StackImplementation<E> implements StackInterface<E> {
 
     @Override
     public boolean isEmpty() {
-        if (currentIndex < 0){
+        if (currentIndex < 0) {
             return true;
         }
         return false;
@@ -94,28 +88,24 @@ public class StackImplementation<E> implements StackInterface<E> {
 
     @Override
     public void clear() {
-        capacity = DEFAULT_STACK_SIZE;
-        Object [] newArray = new Object[capacity];
-        itemArray = newArray;
+        itemArray = new Object[DEFAULT_STACK_SIZE];
         currentIndex = -1;
     }
-
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
-        builder.append("["); 
-        for (int index = 0; index <= currentIndex; index++){
-            builder.append(itemArray[index]);
-            if (index < currentIndex){
+        builder.append("[");
+        for (int index = 0; index <= currentIndex; index++) {
+            builder.append(itemArray[index].toString());
+            if (index < currentIndex) {
                 builder.append(", ");
             }
-            
+
         }
         builder.append("]");
         return builder.toString();
     }
-    
-    
+
 }
