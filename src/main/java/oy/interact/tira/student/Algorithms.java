@@ -153,18 +153,18 @@ public class Algorithms {
    }
 
    public static <E extends Comparable<E>> void fastSort(E[] array) {
-      //quickSort(array, 0, array.length - 1, Comparator.naturalOrder());
-      heapSort(array, Comparator.naturalOrder());
+      quickSort(array, 0, array.length - 1, Comparator.naturalOrder());
+      //heapSort(array, Comparator.naturalOrder());
    }
 
    public static <E> void fastSort(E[] array, Comparator<E> comparator) {
-      //quickSort(array, 0, array.length - 1, comparator);
-      heapSort(array, comparator);
+      quickSort(array, 0, array.length - 1, comparator);
+      //heapSort(array, comparator);
    }
 
    public static <E> void fastSort(E[] array, int fromIndex, int toIndex, Comparator<E> comparator) {
-      //quickSort(array, fromIndex, toIndex, comparator);
-      heapSort(array, fromIndex, toIndex, comparator);
+      quickSort(array, fromIndex, toIndex, comparator);
+      //heapSort(array, fromIndex, toIndex, comparator);
 
    }
 
@@ -281,6 +281,7 @@ public class Algorithms {
       return (2 * i + 1);
    }
 
+   //Not used in this assignment
    private static int rightChild(int i){
       return (2 * i + 2);
    }

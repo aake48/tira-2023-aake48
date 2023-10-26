@@ -180,14 +180,17 @@ Kun taulukosta haetaan tiettyä elementtiä indeksillä, on aikakompleksisuus O(
 ## 06-TASK
 
 * Mitä opin tehtävän tekemisessä
-Opin muodostamaan kaksi erilaista nopeaa lajittelualgoritmia, quicksortin ja heapsortin. Mielestäni quicksort oli helpompi tehdä, kun taas heapsort oli yksinkertainen paperilla, mutta koodin muodostamisessa ilmeni hieman vaikeuksia. 
+Opin muodostamaan kaksi erilaista nopeaa lajittelualgoritmia, quicksortin (Hoaren partitiointi algoritmilla) ja heapsortin. Mielestäni quicksort oli helpompi tehdä, kun taas heapsort oli yksinkertainen paperilla, mutta koodin muodostamisessa ilmeni hieman vaikeuksia. 
 
-![Hidas_lajittelu](task06_insertionsort_lajitteluaika.png)
+![Hidas_lajittelu](task06_insertionsort_lajitteluaika.png)![Insertionsort2](task06_insertionsort_lajittelu_per_elementti.png)
 
-![Quicksort](task06_quickSort_lajitteluaika.png)
+Insertionsortilla tehtyjen testien tulokset. Algoritmi on todella hidas, ja 100 000 elementin kokoisen aineiston lajitteluun meni melkein 800 sekuntia
 
-![Heapsort](task06_heapSort_lajitteluaika.png)
+![Quicksort](task06_quickSort_lajitteluaika.png)![Quicksort2](task06_quicksort_lajittelu_per_elementti.png)
+Quicksort on näistä algoritmeista nopein, ja 2 000 000 elementin kokoisen aineiston lajitteluun meni vain hieman reilu 20 000 millisekuntia eli vähän yli 20 sekuntia 
 
+![Heapsort](task06_heapSort_lajitteluaika.png)![Heapsort2](task06_heapsort_lajittelu_per_elementti.png)
+Heapsortissa 2 000 000 elementin kokoisen aineiston lajitteluun meni hieman yli 40 000 millisekuntia eli hieman yli 40 sekuntia eli heapsort on tällä aineistolla hitaampi kuin quicksort.
 
 
              QUICKSORT  HEAPSORT    INSERTIONSORT
@@ -202,6 +205,9 @@ Count        ms/element	ms/element	ms/element
 1000000      0,011      0,018
 2000000      0,011      0,021
 
+Taulukosta voidaan nähdä, että quicksortilla ja heapsortilla 1000 elementin aineistolla on isompi suoritusaika per elementti (0,23 ja 0,27) kuin 5000 elementin aineistolla (0,007 ja 0,009)
+
+Kaiken kaikkiaan voidaan huomata että tällä aineistolla ja näillä testeillä heapsort on hitaampi kuin quicksort, johtuen esim. siitä että heapsortilla keon rakentaminen ja uudelleen järjestely vie aikaa, kun taas quicksortissa lajittelu tapahtuu jakamalla joka on nopeampaa. Pahimmassa tapauksessa quicksortin aikakompleksisuus on Big-O notaatiolla O(n^2) kun taas heapsortilla se on O(n log n). Pahin tapaus tapahtuu quicksortilla silloin, kun pivottina toimii taulukon pienin tai suurin arvo, ja tämä arvo on oikealla paikallaan eli taulukon alussa tai lopussa. Ongelmaa pystyy kuitenkin "väistämään" suhteellisen hyvin ottamalla esimerkiksi taulukon alusta, keskeltä ja lopusta mediaani arvo, jota käytetään sitten pivottina. Heapsortin hyvänä puolena taas on se, että pahimman tapauksen aikakompleksisuus on sama kuin quicksortin paras eli O(n log n), eli jos lajittelua tehdään usein ja siihen tarvitaan vakautta, kannattaa sillon valita heapsort.
 
 ## 07-TASK
 
