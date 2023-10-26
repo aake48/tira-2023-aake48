@@ -189,19 +189,18 @@ Opin muodostamaan kaksi erilaista nopeaa lajittelualgoritmia, quicksortin ja hea
 ![Heapsort](task06_heapSort_lajitteluaika.png)
 
 
-``
-         QUICKSORT	HEAPSORT	   INSERTIONSORT
-         ms/element	ms/element	ms/element
-Count
-100          0,23		    0,27		 0,32
-1000         0,018		0,021		0,097
-5000         0,007		0,009		0,232
-10000        0,004		0,007		0,508
-50000        0,007		0,01		5,703
-100000       0,007		0,011		7,821
-1000000      0,011		0,018
-2000000      0,011		0,021
-``
+
+             QUICKSORT  HEAPSORT    INSERTIONSORT
+Count        ms/element	ms/element	ms/element
+
+100          0,23       0,27        0,32
+1000         0,018      0,021       0,097
+5000         0,007      0,009       0,232
+10000        0,004      0,007       0,508
+50000        0,007      0,01        5,703
+100000       0,007      0,011       7,821
+1000000      0,011      0,018
+2000000      0,011      0,021
 
 
 ## 07-TASK
