@@ -153,18 +153,18 @@ public class Algorithms {
    }
 
    public static <E extends Comparable<E>> void fastSort(E[] array) {
-      //quickSort(array, 0, array.length - 1, Comparator.naturalOrder());
-      heapSort(array, Comparator.naturalOrder());
+      quickSort(array, 0, array.length - 1, Comparator.naturalOrder());
+      //heapSort(array, Comparator.naturalOrder());
    }
 
    public static <E> void fastSort(E[] array, Comparator<E> comparator) {
-      //quickSort(array, 0, array.length - 1, comparator);
-      heapSort(array, comparator);
+      quickSort(array, 0, array.length - 1, comparator);
+      //heapSort(array, comparator);
    }
 
    public static <E> void fastSort(E[] array, int fromIndex, int toIndex, Comparator<E> comparator) {
-      //quickSort(array, fromIndex, toIndex, comparator);
-      heapSort(array, fromIndex, toIndex, comparator);
+      quickSort(array, fromIndex, toIndex, comparator);
+      //heapSort(array, fromIndex, toIndex, comparator);
 
    }
 
@@ -185,10 +185,10 @@ public class Algorithms {
    private static <E> int partition(E[] array, int low, int high, Comparator<E> comparator) {
 
 
-      int middle = low + (high - low) / 2;
+      int pivotIndex = (int)Math.floor(low + (high - low) / 2);
       
       //Pivot is the value in the middle of the array
-      E pivot = array[middle];
+      E pivot = array[pivotIndex];
 
       int leftIndex = low - 1;
       int rightIndex = high + 1;
