@@ -192,8 +192,8 @@ Quicksort on näistä algoritmeista nopein, ja 2 000 000 elementin kokoisen aine
 ![Heapsort](task06_heapSort_lajitteluaika.png)![Heapsort2](task06_heapsort_lajittelu_per_elementti.png)
 Heapsortissa 2 000 000 elementin kokoisen aineiston lajitteluun meni hieman yli 40 000 millisekuntia eli hieman yli 40 sekuntia eli heapsort on tällä aineistolla hitaampi kuin quicksort.
 
-
              QUICKSORT  HEAPSORT    INSERTIONSORT
+
 Count        ms/element	ms/element	ms/element
 
 100          0,23       0,27        0,32
@@ -203,7 +203,8 @@ Count        ms/element	ms/element	ms/element
 50000        0,007      0,01        5,703
 100000       0,007      0,011       7,821
 1000000      0,011      0,018
-2000000      0,011      0,021            
+2000000      0,011      0,021   
+         QUICKSORT  HEAPSORT    INSERTIONSORT         
 
 Taulukosta voidaan nähdä, että quicksortilla ja heapsortilla 1000 elementin aineistolla on isompi suoritusaika per elementti (0,23 ja 0,27) kuin 5000 elementin aineistolla (0,007 ja 0,009)
 
