@@ -66,23 +66,23 @@ public class Algorithms {
 
    public static <T> void insertionSort(T[] array, int fromIndex, int toIndex, Comparator<T> comparator) {
 
-         for (int currentIndex = fromIndex; currentIndex < toIndex; currentIndex++) {
-            // Storing the element in currentIndex for comparing
-            T currentElement = array[currentIndex];
+      for (int currentIndex = fromIndex; currentIndex < toIndex; currentIndex++) {
+         // Storing the element in currentIndex for comparing
+         T currentElement = array[currentIndex];
 
-            /*
-             * Index that is used in the innder loop to compare the currentElement and the
-             * element in currentIndex - 1
-             */
-            int previousIndex = currentIndex - 1;
+         /*
+          * Index that is used in the innder loop to compare the currentElement and the
+          * element in currentIndex - 1
+          */
+         int previousIndex = currentIndex - 1;
 
-            while (previousIndex >= fromIndex && currentElement != null
-                  && comparator.compare(array[previousIndex], currentElement) > 0) {
-               swap(array, previousIndex, previousIndex + 1);
-               previousIndex--;
-            }
+         while (previousIndex >= fromIndex && currentElement != null
+               && comparator.compare(array[previousIndex], currentElement) > 0) {
+            swap(array, previousIndex, previousIndex + 1);
+            previousIndex--;
          }
-      
+      }
+
    }
 
    ///////////////////////////////////////////
@@ -154,17 +154,17 @@ public class Algorithms {
 
    public static <E extends Comparable<E>> void fastSort(E[] array) {
       quickSort(array, 0, array.length - 1, Comparator.naturalOrder());
-      //heapSort(array, Comparator.naturalOrder());
+      // heapSort(array, Comparator.naturalOrder());
    }
 
    public static <E> void fastSort(E[] array, Comparator<E> comparator) {
       quickSort(array, 0, array.length - 1, comparator);
-      //heapSort(array, comparator);
+      // heapSort(array, comparator);
    }
 
    public static <E> void fastSort(E[] array, int fromIndex, int toIndex, Comparator<E> comparator) {
       quickSort(array, fromIndex, toIndex, comparator);
-      //heapSort(array, fromIndex, toIndex, comparator);
+      // heapSort(array, fromIndex, toIndex, comparator);
 
    }
 
@@ -184,105 +184,102 @@ public class Algorithms {
 
    private static <E> int partition(E[] array, int low, int high, Comparator<E> comparator) {
 
+      int pivotIndex = low + (high - low) / 2;
 
-      int pivotIndex = (int)Math.floor(low + (high - low) / 2);
-      
-      //Pivot is the value in the middle of the array
+      // Pivot is the value in the middle of the array
       E pivot = array[pivotIndex];
 
       int leftIndex = low - 1;
       int rightIndex = high + 1;
       while (true) {
 
-         //Move from the left side of the array to the right as long as the value
-         //is less than pivot
+         // Move from the left side of the array to the right as long as the value
+         // is less than pivot
          do {
             leftIndex++;
          } while (comparator.compare(array[leftIndex], pivot) < 0);
 
-         //Move from the right side of the array to the left as long as the value
-         //is more than pivot
+         // Move from the right side of the array to the left as long as the value
+         // is more than pivot
          do {
             rightIndex--;
          } while (comparator.compare(array[rightIndex], pivot) > 0);
 
-         //If leftIndex and rightIndex cross, return rightIndex (pivot is in correct position)
-         if (leftIndex >= rightIndex){
+         // If leftIndex and rightIndex cross, return rightIndex (pivot is in correct
+         // position)
+         if (leftIndex >= rightIndex) {
             return rightIndex;
          }
-         
+
          swap(array, leftIndex, rightIndex);
-         
 
       }
    }
 
-   public static <E> void heapSort(E[] array, Comparator<E> comparator){
+   public static <E> void heapSort(E[] array, Comparator<E> comparator) {
       heapSort(array, 0, array.length, comparator);
    }
 
-   public static <E> void heapSort(E[] array, int fromIndex, int toIndex, Comparator<E> comparator){
-         heapify(array, toIndex - 1, comparator);
+   public static <E> void heapSort(E[] array, int fromIndex, int toIndex, Comparator<E> comparator) {
+      heapify(array, toIndex - 1, comparator);
 
       toIndex = toIndex - 1;
 
-      while (toIndex > 0){
-         swap (array, toIndex, 0);
+      while (toIndex > 0) {
+         swap(array, toIndex, 0);
          toIndex = toIndex - 1;
          siftDown(array, 0, toIndex, comparator);
       }
 
-
    }
 
-   private static <E> void heapify (E[] array, int end, Comparator<E> comparator){
+   private static <E> void heapify(E[] array, int end, Comparator<E> comparator) {
 
       int start = parent(end);
 
-      while (start >= 0){
+      while (start >= 0) {
          siftDown(array, start, end, comparator);
          start--;
       }
 
    }
 
-   private static <E> void siftDown (E[] array, int startIndex, int endIndex, Comparator<E> comparator){
+   private static <E> void siftDown(E[] array, int startIndex, int endIndex, Comparator<E> comparator) {
       int root = startIndex;
       int child;
       int swap;
-      while(leftChild(root) <= endIndex){
+      while (leftChild(root) <= endIndex) {
          child = leftChild(root);
          swap = root;
 
-         if (comparator.compare(array[swap], array[child]) < 0){
+         if (comparator.compare(array[swap], array[child]) < 0) {
             swap = child;
          }
 
-         if (child + 1 <= endIndex && comparator.compare(array[swap], array[child + 1]) < 0){
+         if (child + 1 <= endIndex && comparator.compare(array[swap], array[child + 1]) < 0) {
             swap = child + 1;
          }
 
-         if (swap == root){
+         if (swap == root) {
             return;
-         }else {
+         } else {
             swap(array, root, swap);
             root = swap;
          }
       }
 
-      
    }
 
-   private static int parent(int i){
-      return (int)Math.floor((i-1) / 2);
+   private static int parent(int i) {
+      return (int) Math.floor((i - 1) / 2);
    }
 
-   private static int leftChild(int i){
+   private static int leftChild(int i) {
       return (2 * i + 1);
    }
 
-   //Not used in this assignment
-   private static int rightChild(int i){
+   // Not used in task06, left if needed in later tasks
+   private static int rightChild(int i) {
       return (2 * i + 2);
    }
 }
