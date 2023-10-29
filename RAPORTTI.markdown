@@ -45,7 +45,7 @@ Tehtävässä opin muodostamaan yksinkertaisen lajittelualgoritmin. Helppoa teht
 * Mikä on toteuttamasi lajittelualgortmin aikakompleksisuusluokka?
 
 Lajittelualgoritmin aikakompleksisuusluokka on neliöllinen eli O(n^2). Eli tietomäärän kasvaessa tarpeeksi, kasvaa algoritmin suoritusaika jopa eksponentiaalisesti. Algoritmi toimii sujuvasti pienien tietomäärien kanssa ja tällöin suoritusaika on lineaarinen, eikä se vaadi lisämuistia tehden siitä hyvän vaihtoehdon jos tietomäärät ovat pieniä. Jos tietomäärät ovat suuria, menee algoritmilla paljon aikaa lajitteluun eikä tämän takia välttämättä sovellu hyvin käyttöön niiden kanssa.
-``
+`
 	public static <T extends Comparable<T>> void insertionSort(T[] array, int fromIndex, int toIndex) {
       if (array != null && fromIndex >= 0 && toIndex <= array.length){
       for (int currentIndex = fromIndex; currentIndex < toIndex; currentIndex++) {
@@ -58,7 +58,7 @@ Lajittelualgoritmin aikakompleksisuusluokka on neliöllinen eli O(n^2). Eli tiet
          }
       }
    }
-}``
+}`
 
 * Mikä on toteuttamasi reverse -algoritmin aikakompleksisuusluokka?
 
