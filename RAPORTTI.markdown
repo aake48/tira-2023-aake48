@@ -38,6 +38,7 @@ Alaluvut jokaisen tehtävän raportille löydät alta.
 
 ## 01-TASK
 
+
 * Mitä opin, mikä oli vaikeaa, mikä helppoa jne.
 
 Tehtävässä opin muodostamaan yksinkertaisen lajittelualgoritmin. Helppoa tehtävässä oli perusasiat, eli toistorakenteiden käyttö jne. Mielestäni vaikeinta oli hahmottaa miten algoritmi tarkalleen ottaen toimii, ja sen takia minulla piti monta kertaa hahmotella paperille, mitä taulukossa tapahtuu lajittelun aikana. Vaikka kyseinen algoritmi on toteutettu aikaisemmalla kurssilla, niin kesän aikana koodaus on jäänyt vähemmälle, ja tämän takia piti tehdä suhteellisen paljon mieleen palauttelua että pääsin asiasta jyvälle ja sisäistin sen. Tehtävässä korostui myös hyvin koodin uudelleenkäytettävyys, esimerkiksi swap algoritmin käyttäminen muissa algoritmeissa sekä ensin tekemällä insertionSort(T[] array, int fromIndex, int toIndex) algoritmi, jonka jälkeen sitä pystyi hyödyntämään insertionSort(T[] array) algoritmissa. Reverse algoritmin pystyi myös toteuttamaan samalla tavalla.
@@ -45,20 +46,20 @@ Tehtävässä opin muodostamaan yksinkertaisen lajittelualgoritmin. Helppoa teht
 * Mikä on toteuttamasi lajittelualgortmin aikakompleksisuusluokka?
 
 Lajittelualgoritmin aikakompleksisuusluokka on neliöllinen eli O(n^2). Eli tietomäärän kasvaessa tarpeeksi, kasvaa algoritmin suoritusaika jopa eksponentiaalisesti. Algoritmi toimii sujuvasti pienien tietomäärien kanssa ja tällöin suoritusaika on lineaarinen, eikä se vaadi lisämuistia tehden siitä hyvän vaihtoehdon jos tietomäärät ovat pieniä. Jos tietomäärät ovat suuria, menee algoritmilla paljon aikaa lajitteluun eikä tämän takia välttämättä sovellu hyvin käyttöön niiden kanssa.
-`
-	public static <T extends Comparable<T>> void insertionSort(T[] array, int fromIndex, int toIndex) {
-      if (array != null && fromIndex >= 0 && toIndex <= array.length){
-      for (int currentIndex = fromIndex; currentIndex < toIndex; currentIndex++) {
-         T currentElement = array[currentIndex];
-         int previousIndex = currentIndex - 1;
+```
+      public static <T extends Comparable<T>> void insertionSort(T[] array, int fromIndex, int toIndex) {
+         if (array != null && fromIndex >= 0 && toIndex <= array.length){
+         for (int currentIndex = fromIndex; currentIndex < toIndex; currentIndex++) {
+            T currentElement = array[currentIndex];
+            int previousIndex = currentIndex - 1;
 
-         while (previousIndex >= fromIndex && array[previousIndex].compareTo(currentElement) > 0) {
-            swap(array, previousIndex, previousIndex + 1);
-            previousIndex--;
+            while (previousIndex >= fromIndex && array[previousIndex].compareTo(currentElement) > 0) {
+               swap(array, previousIndex, previousIndex + 1);
+               previousIndex--;
+            }
          }
       }
-   }
-}`
+}```
 
 * Mikä on toteuttamasi reverse -algoritmin aikakompleksisuusluokka?
 
@@ -118,22 +119,22 @@ Tässä taas on puolitushaun hakuaika. Kuvista voidaan nähdä että puolitushak
 TIRA Codersissa tehdyt havainnot:
 
 Log viewin tulokset:
+```
+      Översti Aiden-Jack Arnab
 
-Översti Aiden-Jack Arnab
+      Search took 75ms
+      Fast search took 0 ms
 
-Search took 75ms
-Fast search took 0 ms
+      Källi Agnetha Bailie
 
-Källi Agnetha Bailie
+      Search took 23ms
+      Fast search took 0ms
 
-Search took 23ms
-Fast search took 0ms
+      Aalliniemi Muhammed Tayyib
 
-Aalliniemi Muhammed Tayyib
-
-Search took 0 ms
-Fast search took 0 ms
-
+      Search took 0 ms
+      Fast search took 0 ms
+```
 * Mikä on tässä nopeassa haussa keskimäärin suoritusaika suhteessa ensimmäiseen hakuun?
 	1. Haussa 75ms
 	2. Haussa (nopeammassa) 0ms
@@ -187,9 +188,11 @@ Opin muodostamaan kaksi erilaista nopeaa lajittelualgoritmia, quicksortin (Hoare
 Insertionsortilla tehtyjen testien tulokset. Algoritmi on todella hidas, ja 100 000 elementin kokoisen aineiston lajitteluun meni melkein 800 sekuntia
 
 ![Quicksort](task06_quickSort_lajitteluaika.png)![Quicksort2](task06_quicksort_lajittelu_per_elementti.png)
+
 Quicksort on näistä algoritmeista nopein, ja 2 000 000 elementin kokoisen aineiston lajitteluun meni vain hieman reilu 20 000 millisekuntia eli vähän yli 20 sekuntia 
 
 ![Heapsort](task06_heapSort_lajitteluaika.png)![Heapsort2](task06_heapsort_lajittelu_per_elementti.png)
+
 Heapsortissa 2 000 000 elementin kokoisen aineiston lajitteluun meni hieman yli 40 000 millisekuntia eli hieman yli 40 sekuntia eli heapsort on tällä aineistolla hitaampi kuin quicksort.
 
 
