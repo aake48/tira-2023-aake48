@@ -45,7 +45,7 @@ Tehtävässä opin muodostamaan yksinkertaisen lajittelualgoritmin. Helppoa teht
 
 * Mikä on toteuttamasi lajittelualgortmin aikakompleksisuusluokka?
 
-Lajittelualgoritmin aikakompleksisuusluokka on neliöllinen eli O(n^2). Eli tietomäärän kasvaessa tarpeeksi, kasvaa algoritmin suoritusaika jopa eksponentiaalisesti. Algoritmi toimii sujuvasti pienien tietomäärien kanssa ja tällöin suoritusaika on lineaarinen, eikä se vaadi lisämuistia tehden siitä hyvän vaihtoehdon jos tietomäärät ovat pieniä. Jos tietomäärät ovat suuria, menee algoritmilla paljon aikaa lajitteluun eikä tämän takia välttämättä sovellu hyvin käyttöön niiden kanssa.
+Lajittelualgoritmin aikakompleksisuusluokka on neliöllinen eli O(n^2). Eli tietomäärän kasvaessa tarpeeksi, kasvaa algoritmin suoritusaika neliöllisesti. Algoritmi toimii sujuvasti pienien tietomäärien kanssa ja tällöin suoritusaika on lineaarinen, eikä se vaadi lisämuistia tehden siitä hyvän vaihtoehdon jos tietomäärät ovat pieniä. Jos tietomäärät ovat suuria, menee algoritmilla paljon aikaa lajitteluun eikä tämän takia välttämättä sovellu hyvin käyttöön niiden kanssa.
 ```
       public static <T extends Comparable<T>> void insertionSort(T[] array, int fromIndex, int toIndex) {
          if (array != null && fromIndex >= 0 && toIndex <= array.length){
@@ -61,6 +61,8 @@ Lajittelualgoritmin aikakompleksisuusluokka on neliöllinen eli O(n^2). Eli tiet
       }
 }
 ```
+
+Neliöllisyys näkyy koodissa kahtena toistorakenteena, joista toinen on ensimmäisen toistorakenteen sisällä.
 
 * Mikä on toteuttamasi reverse -algoritmin aikakompleksisuusluokka?
 
@@ -145,7 +147,7 @@ Log viewin tulokset:
 * Kokeile hakea molemmilla tavoilla koodareita myös listan alusta. Mitä huomaat?
 * Miksi jompi kumpi haku on nopeampi, ja onko sillä väliä haetaanko aineiston alusta vai lopusta? Pohdi ja perustele.
 
-Ensimmäinen haku on tehty listan lopusta, toinen haku keskikohdasta ja viimeinen listan alusta, tiedostona on käytetty 50000 koodaria sisältävää listaa. Voidaan huomata, että kun haetaan koodaria lineaarisesti, niin aika joka menee hakemiseen on suurempi listan loppupäässä verrattuna alkupäähän. Tämä johtuu siitä että haku tehdään lineaarisesti, eli käydään alkiot läpi yksi kerrallaan, jolloin listan alussa olevat koodarit löytyvät nopeammin kuin listan loppussa olevat koodarit (tässä tapauksessa on aineisto lajiteltu jonka takia näin käy). Toisaalta taas kun tehdään puolitushaku (binary search), on kaikissa "Fast search" 0 ms. Puolitushaku toimii suurilla tietomäärillä paljon nopeammin kun jokaista yksittäistä alkiota ei käydä läpi, vaan jokaisella haku kerralla hakualue jaetaan kahteen osaan.
+Ensimmäinen haku on tehty listan lopusta, toinen haku keskikohdasta ja viimeinen listan alusta, tiedostona on käytetty 50000 koodaria sisältävää listaa. Voidaan huomata, että kun haetaan koodaria lineaarisesti, niin aika joka menee hakemiseen on suurempi listan loppupäässä verrattuna alkupäähän. Tämä johtuu siitä että haku tehdään lineaarisesti, eli käydään alkiot läpi yksi kerrallaan, jolloin listan alussa olevat koodarit löytyvät nopeammin kuin listan loppussa olevat koodarit (tässä tapauksessa aineisto on lajiteltu jonka takia näin käy). Toisaalta taas kun tehdään puolitushaku (binary search), on kaikissa "Fast search" 0 ms. Puolitushaku toimii suurilla tietomäärillä paljon nopeammin kun jokaista yksittäistä alkiota ei käydä läpi, vaan jokaisella haku kerralla hakualue puolitetaan.
 
 Pienemmillä tietomäärillä hakuajat eivät eroa paljoa, jolloin ei periaatteessa ole väliä kumpaa hakualgoritmia käyttää. Toisaalta pitää ottaa huomioon, että puolitushaun toimiminen vaatii sen, että lista on järjestelty, kun taas lineaarinen haku toimii millä tahansa järjestyksellä, mutta tietomäärän kasvaessa sen suoritusaika kasvaa myös. Eli periaatteessa jos tietomäärä on suuri ja se on lajiteltu, on silloin aikatehokkaampaa käyttää puolitushakua.
 
