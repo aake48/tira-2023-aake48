@@ -59,7 +59,8 @@ Lajittelualgoritmin aikakompleksisuusluokka on neliöllinen eli O(n^2). Eli tiet
             }
          }
       }
-}```
+}
+```
 
 * Mikä on toteuttamasi reverse -algoritmin aikakompleksisuusluokka?
 
