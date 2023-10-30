@@ -153,25 +153,25 @@ public class Algorithms {
    }
 
    public static <E extends Comparable<E>> void fastSort(E[] array) {
-      quickSort(array, 0, array.length - 1, Comparator.naturalOrder());
-      // heapSort(array, Comparator.naturalOrder());
+      //quickSort(array, 0, array.length - 1, Comparator.naturalOrder());
+       heapSort(array, Comparator.naturalOrder());
    }
 
    public static <E> void fastSort(E[] array, Comparator<E> comparator) {
-      quickSort(array, 0, array.length - 1, comparator);
-      // heapSort(array, comparator);
+      //quickSort(array, 0, array.length - 1, comparator);
+       heapSort(array, comparator);
    }
 
    public static <E> void fastSort(E[] array, int fromIndex, int toIndex, Comparator<E> comparator) {
-      quickSort(array, fromIndex, toIndex, comparator);
-      // heapSort(array, fromIndex, toIndex, comparator);
+      //quickSort(array, fromIndex, toIndex, comparator);
+       heapSort(array, fromIndex, toIndex, comparator);
 
    }
 
    //////// QUICKSORT ////////
 
    public static <E> void quickSort(E[] array, Comparator<E> comparator) {
-      quickSort(array, 0, array.length, comparator);
+      quickSort(array, 0, array.length - 1, comparator);
    }
 
    public static <E> void quickSort(E[] array, int low, int high, Comparator<E> comparator) {
