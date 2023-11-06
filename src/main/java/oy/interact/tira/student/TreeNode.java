@@ -1,5 +1,9 @@
 package oy.interact.tira.student;
 
+
+
+import oy.interact.tira.util.Pair;
+
 public class TreeNode<K extends Comparable<K>, V> {
 
     private K key;
@@ -20,6 +24,7 @@ public class TreeNode<K extends Comparable<K>, V> {
         }
     }
 
+
     public boolean insert(K key, V value) {
 
         boolean result = false;
@@ -29,7 +34,7 @@ public class TreeNode<K extends Comparable<K>, V> {
             return result;
         }
 
-        // Add to left side if parameter key is smaller
+        // Add to left side if parameter key is smaller or equal to this.key
         if (key.compareTo(this.key) <= 0) {
             if (leftChild == null) {
                 leftChild = new TreeNode<>(key, value);
@@ -70,12 +75,31 @@ public class TreeNode<K extends Comparable<K>, V> {
         return result;
     }
 
+    public void toArray (Pair<K, V> [] array, int currentIndex){
+        if (leftChild != null){
+            leftChild.toArray(array, currentIndex);
+        }
+        array[currentIndex] = new Pair<K, V>(key, value);
+        currentIndex++;
+        if (rightChild != null){
+            rightChild.toArray(array, currentIndex);
+        }
+    }
+
     public K getKey() {
         return key;
     }
 
     public V getValue() {
         return value;
+    }
+
+    public TreeNode<K, V> getLeftChild() {
+        return leftChild;
+    }
+
+    public TreeNode<K, V> getRightChild() {
+        return rightChild;
     }
 
 }
