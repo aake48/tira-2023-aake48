@@ -2,6 +2,8 @@ package oy.interact.tira.student;
 
 
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import oy.interact.tira.util.Pair;
 
 public class TreeNode<K extends Comparable<K>, V> {
@@ -75,12 +77,13 @@ public class TreeNode<K extends Comparable<K>, V> {
         return result;
     }
 
-    public void toArray (Pair<K, V> [] array, int currentIndex){
+    //int currentindex
+
+    public void toArray (Pair<K, V> [] array, AtomicInteger currentIndex){
         if (leftChild != null){
             leftChild.toArray(array, currentIndex);
         }
-        array[currentIndex] = new Pair<K, V>(key, value);
-        currentIndex++;
+        array[currentIndex.getAndIncrement()] = new Pair<K, V>(key, value);
         if (rightChild != null){
             rightChild.toArray(array, currentIndex);
         }

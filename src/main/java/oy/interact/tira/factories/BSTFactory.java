@@ -14,7 +14,7 @@ public class BSTFactory {
 	}
 
 	public static <K extends Comparable<K>, V> TIRAKeyedOrderedContainer<K,V> createBST(Comparator<K> comparator) {
-		return new BinarySearchTreeContainer<>();
+		return new BinarySearchTreeContainer<>(comparator);
 	}
 
 	// You may create the functionality that analyses a BST using the Visitor pattern

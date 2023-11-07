@@ -1,5 +1,7 @@
 package oy.interact.tira.student;
 
+import java.util.Comparator;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 
 import oy.interact.tira.util.Pair;
@@ -12,6 +14,11 @@ public class BinarySearchTreeContainer<K extends Comparable<K>, V> implements TI
     private TreeNode<K, V> root = null;
     private int count = 0;
     private int maxDepth = 0;
+    private Comparator<K> comparator;  // The comparator used to determine if new node will go to left or right subtree.
+
+	public BinarySearchTreeContainer(Comparator<K> comparator) {
+		this.comparator = comparator;
+	}
 
     /**
      * Adds a key-value pair in the container. Key must be unique, so
@@ -158,9 +165,11 @@ public class BinarySearchTreeContainer<K extends Comparable<K>, V> implements TI
         if (root == null) {
             return array;
         }
-        int arrayIndex[] = { 0 };
+        AtomicInteger arrayIndex = new AtomicInteger(0);
+       // int arrayIndex[] = { 0 };
 
-        root.toArray(array, arrayIndex[0]);
+       // root.toArray(array, arrayIndex[0]);
+       root.toArray(array, arrayIndex);
 
         return array;
 
@@ -271,7 +280,7 @@ public class BinarySearchTreeContainer<K extends Comparable<K>, V> implements TI
             } else {
                 parent = stack.pop();
                 current = parent.getRightChild();
-                if (searcher.test(root.getValue())) {
+                if (searcher.test(parent.getValue())) {
                     return index;
                 }
                 index++;
@@ -285,5 +294,12 @@ public class BinarySearchTreeContainer<K extends Comparable<K>, V> implements TI
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'accept'");
     }
+
+/*     public static void main(String [] args){
+        Pair<Integer, String> array [];
+        
+
+        System.out.println(array.toString());
+    } */
 
 }
