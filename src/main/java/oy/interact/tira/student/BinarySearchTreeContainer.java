@@ -14,22 +14,11 @@ public class BinarySearchTreeContainer<K extends Comparable<K>, V> implements TI
     private TreeNode<K, V> root = null;
     private int count = 0;
     private int maxDepth = 0;
-    private Comparator<K> comparator;  // The comparator used to determine if new node will go to left or right subtree.
+    //private Comparator<K> comparator;  // The comparator used to determine if new node will go to left or right subtree.
 
 	public BinarySearchTreeContainer(Comparator<K> comparator) {
-		this.comparator = comparator;
+		//this.comparator = comparator;
 	}
-
-    /**
-     * Adds a key-value pair in the container. Key must be unique, so
-     * if a key that equals new key already exists in the container, replace
-     * the existing key-value pair with the parameters.
-     * 
-     * @param key   The key to add or update.
-     * @param value The value to add or update.
-     * @throws OutOfMemoryError         If memory runs out while adding elements.
-     * @throws IllegalArgumentException If one or both of the parameters are null.
-     */
 
     @Override
     public void add(K key, V value) throws OutOfMemoryError, IllegalArgumentException {
@@ -50,16 +39,6 @@ public class BinarySearchTreeContainer<K extends Comparable<K>, V> implements TI
         }
     }
 
-    /**
-     * Retrieves a value assosicated with the key (key is equal to some key in the
-     * container), or null
-     * if key cannot be found.
-     * 
-     * @param key The key to use in searching.
-     * @return The value or null if one is not found.
-     * @throws IllegalArgumentException If the key is null.
-     */
-
     @Override
     public V get(K key) throws IllegalArgumentException {
         if (key == null) {
@@ -77,14 +56,6 @@ public class BinarySearchTreeContainer<K extends Comparable<K>, V> implements TI
         throw new UnsupportedOperationException("Unimplemented method 'remove'");
     }
 
-    /**
-     * Searchers for a value conforming to the predicate in the parameter.
-     * 
-     * Returns the first value that conforms to the predicate.
-     * 
-     * @param searcher The predicate that is used in the search.
-     * @return The value conforming to the predicate, or null if not found.
-     */
     @Override
     public V find(Predicate<V> searcher) {
 
@@ -106,6 +77,7 @@ public class BinarySearchTreeContainer<K extends Comparable<K>, V> implements TI
                 current = parent.getRightChild();
                 if (searcher.test(parent.getValue())) {
                     value = parent.getValue();
+                    return value;
                 }
             }
         }
@@ -123,21 +95,14 @@ public class BinarySearchTreeContainer<K extends Comparable<K>, V> implements TI
         return count;
     }
 
-    /**
-     * The total capacity of the container, indicating how many elements
-     * the container can hold currently.
-     * 
-     * @return The capacity of the container.
-     */
     @Override
     public int capacity() {
-        return maxDepth;
+        return Integer.MAX_VALUE;
     }
 
     @Override
     public void ensureCapacity(int capacity) throws OutOfMemoryError, IllegalArgumentException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ensureCapacity'");
+
     }
 
     @Override
@@ -294,12 +259,4 @@ public class BinarySearchTreeContainer<K extends Comparable<K>, V> implements TI
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'accept'");
     }
-
-/*     public static void main(String [] args){
-        Pair<Integer, String> array [];
-        
-
-        System.out.println(array.toString());
-    } */
-
 }
