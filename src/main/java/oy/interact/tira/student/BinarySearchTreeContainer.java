@@ -39,6 +39,10 @@ public class BinarySearchTreeContainer<K extends Comparable<K>, V> implements TI
         }
     }
 
+    public int getMaxDepth(){
+        return maxDepth;
+    }
+
     @Override
     public V get(K key) throws IllegalArgumentException {
         if (key == null) {
@@ -131,9 +135,7 @@ public class BinarySearchTreeContainer<K extends Comparable<K>, V> implements TI
             return array;
         }
         AtomicInteger arrayIndex = new AtomicInteger(0);
-       // int arrayIndex[] = { 0 };
 
-       // root.toArray(array, arrayIndex[0]);
        root.toArray(array, arrayIndex);
 
         return array;
