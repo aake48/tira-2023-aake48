@@ -14,10 +14,10 @@ public class BinarySearchTreeContainer<K extends Comparable<K>, V> implements TI
     private TreeNode<K, V> root = null;
     private int count = 0;
     private int maxDepth = 0;
-    //private Comparator<K> comparator;  // The comparator used to determine if new node will go to left or right subtree.
+    private Comparator<K> comparator;  // The comparator used to determine if new node will go to left or right subtree.
 
 	public BinarySearchTreeContainer(Comparator<K> comparator) {
-		//this.comparator = comparator;
+		this.comparator = comparator;
 	}
 
     @Override
@@ -27,7 +27,7 @@ public class BinarySearchTreeContainer<K extends Comparable<K>, V> implements TI
             throw new IllegalArgumentException("Error: Key or value is null");
         }
         if (root == null) {
-            root = new TreeNode<>(key, value);
+            root = new TreeNode<>(key, value, comparator);
             count++;
             maxDepth = 1;
         } else {
@@ -246,6 +246,7 @@ public class BinarySearchTreeContainer<K extends Comparable<K>, V> implements TI
                 parent = stack.pop();
                 current = parent.getRightChild();
                 if (searcher.test(parent.getValue())) {
+                    
                     return index;
                 }
                 index++;

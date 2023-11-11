@@ -2,27 +2,33 @@ package oy.interact.tira.student;
 
 
 
+import java.util.Comparator;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import oy.interact.tira.util.Pair;
 
-public class TreeNode<K extends Comparable<K>, V> {
+public class TreeNode<K extends Comparable<K>, V>{
 
     private K key;
     private V value;
     private TreeNode<K, V> leftChild = null;
     private TreeNode<K, V> rightChild = null;
     public static int addDepth = 0;
+    private Comparator<K> comparator;
 
     // Constructor
 
-    public TreeNode(K key, V value) {
+    public TreeNode(K key, V value, Comparator<K> comparator) {
         if (key != null) {
             this.key = key;
         }
 
         if (value != null) {
             this.value = value;
+        }
+
+        if (comparator != null){
+            this.comparator = comparator;
         }
     }
 
@@ -37,9 +43,9 @@ public class TreeNode<K extends Comparable<K>, V> {
         }
 
         // Add to left side if parameter key is smaller or equal to this.key
-        if (key.compareTo(this.key) <= 0) {
+        if (comparator.compare(key, this.key) <= 0) {
             if (leftChild == null) {
-                leftChild = new TreeNode<>(key, value);
+                leftChild = new TreeNode<>(key, value, comparator);
                 addDepth++;
                 result = true;
             } else {
@@ -48,7 +54,7 @@ public class TreeNode<K extends Comparable<K>, V> {
             }
         } else { // Add to the right side if parameter key is bigger
             if (rightChild == null) {
-                rightChild = new TreeNode<>(key, value);
+                rightChild = new TreeNode<>(key, value, comparator);
                 addDepth++;
                 result = true;
             } else {
@@ -62,9 +68,9 @@ public class TreeNode<K extends Comparable<K>, V> {
     public V find(K key) {
 
         V result = null;
-        if (this.key.compareTo(key) == 0) {
+        if (comparator.compare(this.key, key) == 0){
             result = value;
-        } else if (key.compareTo(this.key) <= 0) {
+        } else if (comparator.compare(key, this.key) <= 0){
             if (leftChild != null) {
                 result = leftChild.find(key);
             }
