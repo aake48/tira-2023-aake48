@@ -41,11 +41,7 @@ public class StackImplementation<E> implements StackInterface<E> {
             throw new NullPointerException("Error: Element is null");
         }
         if (size() == capacity()) {
-            try {
-                reallocate(itemArray.length * 2);
-            } catch (Exception e) {
-                throw new OutOfMemoryError("Out of memory");
-            }
+            reallocate(itemArray.length * 2);
         }
         currentIndex++;
         itemArray[currentIndex] = element;

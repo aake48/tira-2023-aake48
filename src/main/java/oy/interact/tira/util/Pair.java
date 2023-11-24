@@ -15,6 +15,14 @@ public class Pair<K extends Comparable<K>,V> {
 		return key;
 	}
 
+	public void setKey(K key) {
+		this.key = key;
+	}
+
+	public void setValue(V value) {
+		this.value = value;
+	}
+
 	public V getValue() {
 		return value;
 	}

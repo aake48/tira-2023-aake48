@@ -75,11 +75,7 @@ public class QueueImplementation<E> implements QueueInterface<E> {
         }
 
         if (count == itemArray.length) {
-            try {
-                reallocate(capacity * 2);
-            } catch (Exception e) {
-                throw new OutOfMemoryError("Queue allocation failed, out of memory");
-            }
+            reallocate(capacity * 2);
         }
 
         if (tail >= itemArray.length && head > 0) {

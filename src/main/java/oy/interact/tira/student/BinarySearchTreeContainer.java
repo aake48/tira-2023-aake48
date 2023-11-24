@@ -130,6 +130,7 @@ public class BinarySearchTreeContainer<K extends Comparable<K>, V> implements TI
     @SuppressWarnings("unchecked")
     public Pair<K, V>[] toArray() throws Exception {
 
+        System.out.println(maxDepth);
         Pair<K, V>[] array = (Pair<K, V>[]) new Pair[count];
         if (root == null) {
             return array;

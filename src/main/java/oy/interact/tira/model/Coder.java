@@ -178,25 +178,7 @@ public class Coder implements Comparable<Coder> {
 		return id.equals(((Coder) another).id);
 	}
 
-	////////////////////////////////////////////////////////////////////////////////////////////
-	// TODO: Students: implement the two methods below following the instructions
-	//////////////////////////////////////////////////////////////////////////////////////////// _carefully_!
-	// Expecially see the note in the class comment above, and the comments below.
-	////////////////////////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * Note: this class has a natural ordering that is inconsistent with equals.
-	 * 
-	 * Equals compares the equality of the Coder.id, as compareTo compares
-	 * the Coder full names. This is to make sure we can hold several coders
-	 * in containers having the same name (as happens in real world), but still
-	 * can identify them as different Coders using the Coder.id.
-	 * 
-	 * TODO: Implement compareTo so that the order of coders ordered by using this
-	 * methos
-	 * will be natural order. Meaning, alphabetical order A...Ö (by
-	 * lastname-firstname order).
-	 */
 	@Override
 	public int compareTo(Coder another) {
 		return this.getFullName().compareTo(another.getFullName());
@@ -215,7 +197,13 @@ public class Coder implements Comparable<Coder> {
 	 */
 	@Override
 	public int hashCode() {
-		return 0;
+
+		int hash = 31;
+
+		for (int index = 0; index < id.length(); index++){
+			hash = hash * 31 + id.charAt(index);
+		}
+		return hash;
 	}
 
 }
