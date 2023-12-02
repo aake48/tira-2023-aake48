@@ -16,10 +16,12 @@ public class HashTableContainer<K extends Comparable<K>, V> implements TIRAKeyed
     private static final double LOAD_FACTOR = 0.65;
     private Pair<K, V>[] array;
 
+    @SuppressWarnings("unchecked")
     public HashTableContainer() {
         this.array = (Pair<K, V>[]) new Pair[DEFAULT_TABLE_SIZE];
     }
 
+    @SuppressWarnings("unchecked")
     public void reallocate(int newCapacity) {
 
         if (!(newCapacity <= count)) {
@@ -48,7 +50,6 @@ public class HashTableContainer<K extends Comparable<K>, V> implements TIRAKeyed
         if (count >= array.length * LOAD_FACTOR) {
             reallocate((int) (array.length / LOAD_FACTOR));
         }
-        // int currentProbingCounter Ehkä tämä tuon normi probingcounterin sijasta.
         int hash = key.hashCode();
         int index = 0;
         boolean added = false;
@@ -61,7 +62,6 @@ public class HashTableContainer<K extends Comparable<K>, V> implements TIRAKeyed
                 count++;
             } else if (array[index].getKey().equals(key)) {
                 array[index].setValue(value);
-                pairsUpdated++;
                 addCollided++;
                 added = true;
             } else {
@@ -90,8 +90,12 @@ public class HashTableContainer<K extends Comparable<K>, V> implements TIRAKeyed
                 found = true;
             } else if (pair.getKey().equals(key)) {
                 value = pair.getValue();
-            }
+                found = true;
+            }else{
             hashModifier++;
+            collisionCounter++;
+            probingCounter++;
+            }
         } while (!found);
 
         // If nothing in index, return null
@@ -108,21 +112,16 @@ public class HashTableContainer<K extends Comparable<K>, V> implements TIRAKeyed
     @Override
     public V find(Predicate<V> searcher) {
         int index = 0;
-        int hashIndex = 0;
         V value = null;
 
-        // Tee hashfunktio jolla saa indeksin
-        hashIndex = indexFor(hashIndex, hashIndex);
-
-        while (index < array.length - 1 && array[hashIndex] != null) {
-            if (searcher.test(array[hashIndex].getValue())) {
-                value = array[hashIndex].getValue();
-                return value;
+        while (index < array.length) {
+            if (array[index] != null) {
+                if (searcher.test(array[index].getValue())) {
+                    value = array[index].getValue();
+                    return value;
+                }
             }
             index++;
-            if (index < array.length - 1) {
-
-            }
         }
         // returns null if value not found
         return value;
@@ -139,26 +138,30 @@ public class HashTableContainer<K extends Comparable<K>, V> implements TIRAKeyed
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void ensureCapacity(int capacity) throws OutOfMemoryError, IllegalArgumentException {
         if (count == 0) {
             array = (Pair<K, V>[]) new Pair[capacity];
-        } else {
+        } else if (!(capacity <= count)) {
             reallocate(capacity);
         }
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void clear() {
-        this.array = new Pair[DEFAULT_TABLE_SIZE];
+        this.array = (Pair<K, V>[]) new Pair[DEFAULT_TABLE_SIZE];
         this.count = 0;
         this.collisionCounter = 0;
-        this.addCollided = 0;
-        this.pairsUpdated = 0;
         this.probingCounter = 0;
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Pair<K, V>[] toArray() throws Exception {
+        System.out.println("Count: " + count);
+        System.out.println("Collisions " + collisionCounter);
+        System.out.println("Probing: " + probingCounter);
         Pair<K, V>[] array2 = (Pair<K, V>[]) new Pair[count];
         int index2 = 0;
         for (int index = 0; index < array.length; index++) {
@@ -171,6 +174,9 @@ public class HashTableContainer<K extends Comparable<K>, V> implements TIRAKeyed
     }
 
     private int indexFor(int hash, int hashModifier) {
-        return ((hash + hashModifier) & 0x7FFFFFFF) % array.length;
+        final int c1 = 4;
+        final int c2 = 17;
+        return ((hash + c1 * hashModifier + c2 * (hashModifier * hashModifier) & 0x7FFFFFFF)% array.length);
     }
+
 }

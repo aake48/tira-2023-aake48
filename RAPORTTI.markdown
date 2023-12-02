@@ -250,5 +250,12 @@ Binääriseen hakupuuhun lisääminen on nopeampaa kuin taulukkopohjaiseen simpl
 Käyristä voidaan nähdä, että indeksillä hakeminen on simplecontainerin taulukkopohjaisessa toteutuksessa nopeampaa kuin binäärisessä hakupuussa. Syynä on se, että taulukosta voidaan hakea suoraan indeksillä, kun taas BST pitää käydä solmuja läpi esimerkiksi in order järjestyksessä, kuten omassa toteutuksessani on tehty. Tämä in order läpi käynti on paljon hitaampaa, varsinkin jos puun korkeus on suuri.
 
 ## 08-TASK
+* Mitä opin, mikä oli vaikeaa jne.
+Opin mikä on hajautustaulu tietorakenne, miten ja mihin sitä voidaan käyttää, sekä miten semmoinen toteutetaan koodissa. Osassa metodeiden toteutuksia oli aluksi hieman vaikeuksia, mutta demoja sekä luentovideoita katsomalla ne selkenivät. 
 
+
+![HAJAUTUSTAULU_HAKUAIKA](HAJAUTUSTAULU_HAKUAIKA.png)
+![SIMPLECONTAINER_HAKUAIKA](SIMPLECONTAINER_HAKUAIKA.png)
+
+Kun vertaa taulukkopohjaista toteutusta ja hajautustaulua, voidaan huomata että taulukkopohjaisella toteutuksella haku kestää kauemmin, koska aikakompleksisuus on O(n), kun taas hajautustaululla aikakompleksisuus on O(1)
 ## 09-TASK

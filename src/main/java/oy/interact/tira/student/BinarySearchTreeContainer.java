@@ -31,16 +31,12 @@ public class BinarySearchTreeContainer<K extends Comparable<K>, V> implements TI
             count++;
             maxDepth = 1;
         } else {
-            TreeNode.addDepth++;
+            TreeNode.addDepth = 1;
             if (root.insert(key, value)) {
                 maxDepth = Math.max(maxDepth, TreeNode.addDepth);
                 count++;
             }
         }
-    }
-
-    public int getMaxDepth(){
-        return maxDepth;
     }
 
     @Override
@@ -130,7 +126,8 @@ public class BinarySearchTreeContainer<K extends Comparable<K>, V> implements TI
     @SuppressWarnings("unchecked")
     public Pair<K, V>[] toArray() throws Exception {
 
-        System.out.println(maxDepth);
+        
+        System.out.println("Max depth:" + maxDepth);
         Pair<K, V>[] array = (Pair<K, V>[]) new Pair[count];
         if (root == null) {
             return array;
@@ -249,7 +246,6 @@ public class BinarySearchTreeContainer<K extends Comparable<K>, V> implements TI
                 parent = stack.pop();
                 current = parent.getRightChild();
                 if (searcher.test(parent.getValue())) {
-                    
                     return index;
                 }
                 index++;
