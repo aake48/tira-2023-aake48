@@ -61,8 +61,10 @@ public class HashTableContainer<K extends Comparable<K>, V> implements TIRAKeyed
                 added = true;
                 count++;
             } else if (array[index].getKey().equals(key)) {
+                array[index].setKey(key);
                 array[index].setValue(value);
                 addCollided++;
+                pairsUpdated++;
                 added = true;
             } else {
                 hashModifier++;

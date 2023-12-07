@@ -213,7 +213,7 @@ Vaikka insertionsort toimii huonosti isoilla aineistoilla, se on hyvä valinta j
 * Mitä opin, mikä oli vaikeaa jne.
 Tässä tehtävässä opin miten tietorakenne nimeltä binäärinen hakupuu toimii, ja miten semmoinen voidaan toteuttaa koodissa. Koin että aikaisempiin tehtäviin verrattuna, alkoi tehtävä olla jo melko monimutkainen, ja erinäisiä vaikeuksia ilmenikin kun tein omaa toteutustani. 
 
-Tein suurimman osan metodeista iteratiivisesti hyödyntäen aikaisemmin tehtyä pinotietorakennetta, mutta toArray metodin tein rekursiivisesti.
+Tein suurimman osan metodeista iteratiivisesti hyödyntäen aikaisemmin tehtyä pinotietorakennetta, mutta toArray metodin tein rekursiivisesti. Käytin suurimassa osassa metodeista pinotietorakennetta (ja iteratiivista toteutusta), koska koin että se on mielekkäämpi toteuttaa kuin rekursiivinen toteutus.
 Binäärisen hakupuun algoritmien aikakompleksisuudet ovat seuraavat:
 n = aineiston koko (puun korkeus)
 
@@ -228,21 +228,30 @@ int indexOf(K itemkey) = O(n), joudutaan käyttämään looppia
 Pair<K,V> getIndex(int index) = O(n), joudutaan käyttämään looppia
 int findIndex(Predicate <V> searcher) = O(n), joudutaan käyttämään looppia
 
-Algoritmit ovat oikeellisia, koska esim. kun navigoidaan puun solmujen läpi, ja oikea tieto löytyy, niin se palautetaan. Jos oikeaa tietoa ei löydy niin palautetaan nulli, eli algoritmit eivät jää solmuihin "jumiin" tai ikuiseen silmukkaan. 
+Algoritmit ovat oikeellisia, koska esim. kun navigoidaan puun solmujen läpi, ja oikea tieto löytyy, niin se palautetaan. Jos oikeaa tietoa ei löydy niin palautetaan null, eli algoritmit eivät jää solmuihin "jumiin" tai ikuiseen silmukkaan. 
 
 * Testeistä tulleet tulokset
 ![Alt text](BST_MITTAUKSET.png)
 ![Alt text](SIMPLECONTAINER_MITTAUKSET.png)
-En ajanut BST:n testejä kokonaan loppuun enkä simplecontainerin 1m ja 2m aineiston testejä, koska BST:n mittauksissa meni miljoonan kokoisella aineistolla +4 tuntia.
+En ajanut BST:n testejä kokonaan loppuun enkä simplecontainerin 1m ja 2m aineiston testejä, koska pelkästään BST:n mittauksissa meni miljoonan kokoisella aineistolla +4 tuntia.
+
+Puun korkeudete eri kokoisilla aineistoilla:
+N = 100, Max depth = 13
+N = 1000, Max depth = 22
+N = 5000, Max depth = 29
+N = 10 000, Max depth = 30
+N = 50 000, Max depth = 40
+N = 100 000, Max depth = 38
+N = 1 000 000, Max depth = 51
 
 * TIRA Codersin testaaminen BST:llä
 
 ![Alt text](TIRA_CODERS_BST.png)
 ![Alt text](TIRA_CODERS_BST2.png)
-Ainoa operaatio missä kesti yli 200 ms, oli kun koodareita lajitteli koodari nimen mukaan. Tämä johtuu siitä että on paljon koodareita joilla on sama koodari nimi, ja tässä toteutuksessa jos koodari nimi on sama, niin se laitetaan vasemmanpuoliseksi lapsisolmuksi. Tämän takia puusta muodostuu käytännössä linkitetty lista, jolloin se ei ole tasapainossa ja tämä johtaa lajitteluajan pitenemiseen. Puusta muodostuu siis epämuodostunut (degenerate).
+Ainoa operaatio missä kesti yli 200 ms, oli kun koodareita lajitteli koodari nimen mukaan. Tämä johtuu siitä että on paljon koodareita joilla on sama koodari nimi, ja tässä toteutuksessa jos koodari nimi on sama, niin se laitetaan vasemmanpuoliseksi lapsisolmuksi. Tämän takia puusta muodostuu käytännössä linkitetty lista, jolloin se ei ole tasapainossa ja tämä johtaa lajitteluajan pitenemiseen. Puusta muodostuu siis epämuodostunut (degenerate). Viive voi vaikuttaa käyttäjäkokemukseen negatiivisesti, käyttäjä saattaa ajatella, ettei ohjelma toimi oikein tmv. koska viive on yli 200 ms.
 
 ![Alt text](BST_SC_ADDTIME_COMPARISON.png)
-Binääriseen hakupuuhun lisääminen on nopeampaa kuin taulukkopohjaiseen simplecontaineriin. Tämä johtuu muun muassa siitä, että taulukossa tilan loppuessa, sitä pitää reallokoida, eli kopioidaan vanhat tiedot uuteen isompaan taulukkoon. Binäärisessa hakupuussa ei puuta tarvitse reallokoida, koska ainoa mikä estää puuhun lisäämisen on koneen muistin loppuminen.
+Binääriseen hakupuuhun lisääminen on nopeampaa kuin taulukkopohjaiseen simplecontaineriin. Tämä johtuu muun muassa siitä, että taulukossa tilan loppuessa, sitä pitää reallokoida, eli kopioidaan vanhat tiedot uuteen isompaan taulukkoon jolloin aikakompleksisuus on O(n). Binäärisessa hakupuussa ei puuta tarvitse reallokoida, koska ainoa mikä estää puuhun lisäämisen on koneen muistin loppuminen.
 
 ![Alt text](BST_SC_GETINDEX_TIME_COMPARISON.png)
 
@@ -253,6 +262,16 @@ Käyristä voidaan nähdä, että indeksillä hakeminen on simplecontainerin tau
 * Mitä opin, mikä oli vaikeaa jne.
 Opin mikä on hajautustaulu tietorakenne, miten ja mihin sitä voidaan käyttää, sekä miten semmoinen toteutetaan koodissa. Osassa metodeiden toteutuksia oli aluksi hieman vaikeuksia, mutta demoja sekä luentovideoita katsomalla ne selkenivät. 
 
+
+* Mittausten tulokset ja vertailu BST:n välillä
+![Alt text](BST_MITTAUKSET.png)
+BST nopea toteutus
+![Alt text](SIMPLECONTAINER_MITTAUKSET.png)
+BST hidas taulukkototeutus
+![HAJAUTUSTAULU_MITTAUKSET](HAJAUTUSTAULU_MITTAUKSET.png)
+Hajautustaulu nopea toteutus
+![SIMPLECONTAINER_MITTAUKSET](SIMPLECONTAINER_MITTAUKSET2.png)
+Hajautustaulu hidas taulukkototeutus
 
 ![HAJAUTUSTAULU_HAKUAIKA](HAJAUTUSTAULU_HAKUAIKA.png)
 ![SIMPLECONTAINER_HAKUAIKA](SIMPLECONTAINER_HAKUAIKA.png)

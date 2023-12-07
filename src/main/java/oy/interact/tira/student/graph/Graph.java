@@ -7,6 +7,7 @@ import oy.interact.tira.student.graph.Edge.EdgeType;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -36,13 +37,13 @@ public class Graph<T> {
     * a suitable type of Map, depending on application needs.
     */
    private Map<Vertex<T>, List<Edge<T>>> edgeList = null;
-   
+      
    /**
     * Constructor instantiates a suitable Map data structure
     * depending on the application requirements.
     */
    public Graph() {
-      // TODO: Student: allocate necessary member variables.
+         this.edgeList = new Hashtable<Vertex<T>, List<Edge<T>>>();
    }
 
    /**
@@ -58,8 +59,11 @@ public class Graph<T> {
     * @return Returns the created vertex, placed in the graph's edge list.
     */
    public Vertex<T> createVertexFor(T element) {
-      // TODO: Student, implement this.
-      return null;
+      Vertex<T> vertex = new Vertex<>(element);
+      List<Edge<T>> edges = new ArrayList<>();
+      edgeList.put(vertex, edges);
+      
+      return vertex;
    }
 
    /**
@@ -68,8 +72,7 @@ public class Graph<T> {
     * @return A Set with all the vertices of the graph.
     */
    public Set<Vertex<T>> getVertices() {
-      // TODO: Student, implement this.
-      return null;
+      return edgeList.keySet();
    }
 
    /**
@@ -102,7 +105,10 @@ public class Graph<T> {
     * @return Returns the edges of the vertex or null if no edges from the source.
     */
    public List<Edge<T>> getEdges(Vertex<T> source) {
-      // TODO: Student, implement this.
+      if (source == null){
+         return null;
+      }
+
       return null;
    }
 
