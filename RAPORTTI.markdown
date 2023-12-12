@@ -278,3 +278,11 @@ Hajautustaulu hidas taulukkototeutus
 
 Kun vertaa taulukkopohjaista toteutusta ja hajautustaulua, voidaan huomata että taulukkopohjaisella toteutuksella haku kestää kauemmin, koska aikakompleksisuus on O(n), kun taas hajautustaululla aikakompleksisuus on O(1)
 ## 09-TASK
+
+* Mitä opin, mikä oli vaikeaa jne.
+
+Tässä tehtävässä opin miten verkko tietorakenne muodostetaan, miten sitä hyödynnetään ja millaisia algoritmeja on olemassa verkon käsittelyyn. Koin että verkko kokonaisuutena oli hieman vaikea ymmärtää aluksi, mutta luentomateriaaleja ja demoja katsomalla onnistuin omaksumaan asian.
+
+![Alt text](TIRA_TASK09_HASHTABLE_MITTAUKSET.png)
+![Alt text](TIRA_TASK09_HASHMAP_MITTAUKSET.png)
+![Alt text](TIRA_TASK09_PAREMPI_TAYTTOAIKA.png)

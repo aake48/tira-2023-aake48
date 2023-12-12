@@ -13,7 +13,7 @@ public class HashTableContainer<K extends Comparable<K>, V> implements TIRAKeyed
     private int pairsUpdated = 0;
     private int count = 0;
     private static final int DEFAULT_TABLE_SIZE = 40;
-    private static final double LOAD_FACTOR = 0.65;
+    private static final double LOAD_FACTOR = 1.65;
     private Pair<K, V>[] array;
 
     @SuppressWarnings("unchecked")
@@ -24,6 +24,7 @@ public class HashTableContainer<K extends Comparable<K>, V> implements TIRAKeyed
     @SuppressWarnings("unchecked")
     public void reallocate(int newCapacity) {
 
+        //If given capacity is greater than count, reallocate
         if (!(newCapacity <= count)) {
 
             Pair<K, V>[] oldArray = array;
@@ -47,8 +48,8 @@ public class HashTableContainer<K extends Comparable<K>, V> implements TIRAKeyed
         if (key == null || value == null) {
             throw new IllegalArgumentException("Error: Key or value cannot be null");
         }
-        if (count >= array.length * LOAD_FACTOR) {
-            reallocate((int) (array.length / LOAD_FACTOR));
+        if (count >= array.length * (LOAD_FACTOR - 1)) {
+            reallocate((int) (array.length * LOAD_FACTOR));
         }
         int hash = key.hashCode();
         int index = 0;
@@ -178,7 +179,7 @@ public class HashTableContainer<K extends Comparable<K>, V> implements TIRAKeyed
     private int indexFor(int hash, int hashModifier) {
         final int c1 = 4;
         final int c2 = 17;
-        return ((hash + c1 * hashModifier + c2 * (hashModifier * hashModifier) & 0x7FFFFFFF)% array.length);
+        return ((hash + c1 * hashModifier + c2 * (hashModifier * hashModifier) & 0x7FFFFFFF) % array.length);
     }
 
 }
