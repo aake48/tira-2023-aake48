@@ -141,12 +141,14 @@ public class Graph<T> {
     *         element.
     */
    public Vertex<T> getVertexFor(T element) {
-/*       for (Vertex<T> vertex : edgeList.keySet()) {
-         if (vertex.getElement().equals(element)) {
-            return vertex;
-         }
-      }
-      return null; */
+      /*
+       * for (Vertex<T> vertex : edgeList.keySet()) {
+       * if (vertex.getElement().equals(element)) {
+       * return vertex;
+       * }
+       * }
+       * return null;
+       */
       Integer hash = element.hashCode();
       return vertices.get(hash);
    }
@@ -165,14 +167,13 @@ public class Graph<T> {
       Set<Vertex<T>> enqueued = new HashSet<>(); // Already found vertices and marked to be visited
       QueueInterface<Vertex<T>> queue = new QueueImplementation<>(); // Vertices to visit next
 
-   
       queue.enqueue(from);
       enqueued.add(from);
 
       while (!queue.isEmpty()) {
          Vertex<T> vertex = queue.dequeue();
          visited.add(vertex);
-         //If target vertex is found, return list of visited vertices
+         // If target vertex is found, return list of visited vertices
          if (target != null && vertex.getElement().equals(target)) {
             return visited;
          }
@@ -200,43 +201,44 @@ public class Graph<T> {
     * @return Returns all the visited vertices traversed while doing DFS.
     */
    public List<Vertex<T>> depthFirstSearch(Vertex<T> from, Vertex<T> target) {
-      List<Vertex<T>> visited = new ArrayList<>(); //Visited vertices in search
-      Set<Vertex<T>> pushed = new HashSet<>(); //Not yet handled in depth search
-      StackInterface<Vertex<T>> stack = new StackImplementation<>(); //Vertices to search
+      List<Vertex<T>> visited = new ArrayList<>(); // Visited vertices in search
+      Set<Vertex<T>> pushed = new HashSet<>(); // Not yet handled in depth search
+      StackInterface<Vertex<T>> stack = new StackImplementation<>(); // Vertices to search
 
       stack.push(from);
       pushed.add(from);
       visited.add(from);
 
-      while (!stack.isEmpty()){
-         
+      while (!stack.isEmpty()) {
+
          List<Edge<T>> neighbours = getEdges(stack.peek());
 
-         //If graph is directed and the vertex has no neighbors, pop the stack and go backwards
-         if (neighbours.size() == 0){
+         // If graph is directed and the vertex has no neighbors, pop the stack and go
+         // backwards
+         if (neighbours.size() == 0) {
             stack.pop();
             continue;
-         }else {
+         } else {
             boolean continueOuter = false;
-            for (Edge<T> edge : neighbours){
-               if (!pushed.contains(edge.getDestination())){
+            for (Edge<T> edge : neighbours) {
+               if (!pushed.contains(edge.getDestination())) {
                   stack.push(edge.getDestination());
                   pushed.add(edge.getDestination());
                   visited.add(edge.getDestination());
-                  //If target vertex is found, return list of visited vertices
-                  if (target != null && edge.getDestination().equals(target)){
+                  // If target vertex is found, return list of visited vertices
+                  if (target != null && edge.getDestination().equals(target)) {
                      return visited;
                   }
                   continueOuter = true;
                   break;
                }
             }
-               if (continueOuter){
-                  continue;
-               }
+            if (continueOuter) {
+               continue;
             }
-            stack.pop();
          }
+         stack.pop();
+      }
       return visited;
    }
 
@@ -257,8 +259,18 @@ public class Graph<T> {
     */
    public List<T> disconnectedVertices(Vertex<T> toStartFrom) {
       List<T> notInVisited = new ArrayList<>();
-      if (toStartFrom != null){
-      breadthFirstSearch(toStartFrom, null);
+      List<Vertex<T>> visited = new ArrayList<>();
+
+      if (toStartFrom == null) {
+         toStartFrom = edgeList.keySet().iterator().next();
+      }
+
+      visited = breadthFirstSearch(toStartFrom, null);
+
+      for (Vertex<T> vertex : edgeList.keySet()) {
+         if (!visited.contains(vertex)) {
+            notInVisited.add(vertex.getElement());
+         }
       }
       return notInVisited;
    }
@@ -273,9 +285,12 @@ public class Graph<T> {
     */
    public boolean isDisconnected(Vertex<T> toStartFrom) {
 
+      if (toStartFrom == null) {
+         toStartFrom = edgeList.keySet().iterator().next();
+      }
       List<T> disconnected = disconnectedVertices(toStartFrom);
 
-      if (!disconnected.isEmpty()){
+      if (!disconnected.isEmpty()) {
          return true;
       }
       return false;
@@ -299,8 +314,30 @@ public class Graph<T> {
     * @return Returns true if the graph has cycles.
     */
    public boolean hasCycles(EdgeType edgeType, Vertex<T> fromVertex) {
-      // TODO: Student, implement this.
+
+      if (fromVertex == null) {
+         fromVertex = edgeList.keySet().iterator().next();
+      }
+
+      List<Vertex<T>> visited = new ArrayList<>();
+
+      return recursiveHasCycles(fromVertex, visited);
+   }
+
+   private boolean recursiveHasCycles(Vertex<T> vertex, List<Vertex<T>> visitedVertices) {
+
+      visitedVertices.add(vertex);
+
+      for (Edge<T> edge : getEdges(vertex)) {
+         if (visitedVertices.contains(edge.getDestination())) {
+            return true;
+         } else if (recursiveHasCycles(edge.getDestination(), visitedVertices)) {
+            return true;
+         }
+      }
+
       return false;
+
    }
 
    // Dijkstra starts here.
@@ -448,24 +485,24 @@ public class Graph<T> {
     */
    @Override
    public String toString() {
-    
-       //Remove this and uncomment code below when you are ready.
-       StringBuilder output = new StringBuilder();
-       for (Map.Entry<Vertex<T>, List<Edge<T>>> entry : edgeList.entrySet()) {
-       output.append("[");
-       output.append(entry.getKey().toString());
-       output.append("] -> [ ");
-       int counter = 0;
-       int count = entry.getValue().size();
-       for (Edge<T> edge : entry.getValue()) {
-       output.append(edge.getDestination().toString());
-       if (counter < count - 1) {
-       output.append(", ");
-       }
-       counter++;
-       }
-       output.append(" ]\n");
-       }
-       return output.toString();
+
+      // Remove this and uncomment code below when you are ready.
+      StringBuilder output = new StringBuilder();
+      for (Map.Entry<Vertex<T>, List<Edge<T>>> entry : edgeList.entrySet()) {
+         output.append("[");
+         output.append(entry.getKey().toString());
+         output.append("] -> [ ");
+         int counter = 0;
+         int count = entry.getValue().size();
+         for (Edge<T> edge : entry.getValue()) {
+            output.append(edge.getDestination().toString());
+            if (counter < count - 1) {
+               output.append(", ");
+            }
+            counter++;
+         }
+         output.append(" ]\n");
+      }
+      return output.toString();
    }
 }

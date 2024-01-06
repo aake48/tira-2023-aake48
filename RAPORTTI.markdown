@@ -235,7 +235,7 @@ Algoritmit ovat oikeellisia, koska esim. kun navigoidaan puun solmujen läpi, ja
 ![Alt text](SIMPLECONTAINER_MITTAUKSET.png)
 En ajanut BST:n testejä kokonaan loppuun enkä simplecontainerin 1m ja 2m aineiston testejä, koska pelkästään BST:n mittauksissa meni miljoonan kokoisella aineistolla +4 tuntia.
 
-Puun korkeudete eri kokoisilla aineistoilla:
+Puun korkeudet eri kokoisilla aineistoilla:
 N = 100, Max depth = 13
 N = 1000, Max depth = 22
 N = 5000, Max depth = 29
@@ -260,29 +260,97 @@ Käyristä voidaan nähdä, että indeksillä hakeminen on simplecontainerin tau
 
 ## 08-TASK
 * Mitä opin, mikä oli vaikeaa jne.
+
 Opin mikä on hajautustaulu tietorakenne, miten ja mihin sitä voidaan käyttää, sekä miten semmoinen toteutetaan koodissa. Osassa metodeiden toteutuksia oli aluksi hieman vaikeuksia, mutta demoja sekä luentovideoita katsomalla ne selkenivät. 
 
 
 * Mittausten tulokset ja vertailu BST:n välillä
-![Alt text](BST_MITTAUKSET.png)
+
+Vertaa hajautustaulun aikatehokkuutta BST:n aikatehokkuuteen:
+
+missä BST on nopeampi kuin hajautustaulu, ja päinvastoin? Miksi?
+onko toinen tietorakenne nopeampi pienemmillä aineistoilla ja hitaampi suuremmilla kuin toinen; kumpi? Milloin ja miksi?
+
 BST nopea toteutus
+![Alt text](BST_MITTAUKSET.png)
+Simplecontainer hidas taulukkototeutus
 ![Alt text](SIMPLECONTAINER_MITTAUKSET.png)
-BST hidas taulukkototeutus
-![HAJAUTUSTAULU_MITTAUKSET](HAJAUTUSTAULU_MITTAUKSET.png)
 Hajautustaulu nopea toteutus
-![SIMPLECONTAINER_MITTAUKSET](SIMPLECONTAINER_MITTAUKSET2.png)
+![HAJAUTUSTAULU_MITTAUKSET](HAJAUTUSTAULU_MITTAUKSET.png)
 Hajautustaulu hidas taulukkototeutus
+![SIMPLECONTAINER_MITTAUKSET](SIMPLECONTAINER_MITTAUKSET2.png)
 
 ![HAJAUTUSTAULU_HAKUAIKA](HAJAUTUSTAULU_HAKUAIKA.png)
 ![SIMPLECONTAINER_HAKUAIKA](SIMPLECONTAINER_HAKUAIKA.png)
 
-Kun vertaa taulukkopohjaista toteutusta ja hajautustaulua, voidaan huomata että taulukkopohjaisella toteutuksella haku kestää kauemmin, koska aikakompleksisuus on O(n), kun taas hajautustaululla aikakompleksisuus on O(1)
+Kun vertaa taulukkopohjaista toteutusta ja hajautustaulua, voidaan huomata että taulukkopohjaisella toteutuksella haku kestää kauemmin (miljoonan kokoisella aineistolla jopa 18ms/item), koska aikakompleksisuus on O(n) kun joudutaan käymään taulukkoa läpi. Hajautustaululla taas aikakompleksisuus on O(1) kun voidaan suoraan hajautusavaimella hakea elementti, eikä tarvitse tehdä läpikäyntiä.
 ## 09-TASK
 
 * Mitä opin, mikä oli vaikeaa jne.
 
-Tässä tehtävässä opin miten verkko tietorakenne muodostetaan, miten sitä hyödynnetään ja millaisia algoritmeja on olemassa verkon käsittelyyn. Koin että verkko kokonaisuutena oli hieman vaikea ymmärtää aluksi, mutta luentomateriaaleja ja demoja katsomalla onnistuin omaksumaan asian.
+Tässä tehtävässä opin miten verkko tietorakenne muodostetaan, miten sitä hyödynnetään ja millaisia algoritmeja on olemassa verkon käsittelyyn. Koin että verkko kokonaisuutena oli hieman vaikea ymmärtää aluksi, mutta luentomateriaaleja ja demoja katsomalla teoria selkeni hyvin.
 
+* Ovatko verkot harvoja (sparse) vai tiheitä (dense)
+
+
+
+* Map vai matriisi, kumpi parempi tietorakenne tässä tehtävässä?
+
+* Miksi verkon täyttäminen on hidasta? Miksi ohjattu "korjaus" paransi tehokkuutta?
+
+
+![Alt text](pseudokoodi.png)
+Pseudokoodi esimerkistä voi hyvin nähdä miksi täyttämisessä kestää kauan. Aluksi on for silmukka kaikille koodareille, jonka jälkeen for -silmukassa haetaan solmu koodarille, tämän jälkeen haetaan koodarin kaverit, jota seuraa uusi for -silmukka kaikille kaikille koodarin kavereille, tämän jälkeen haetaan vielä for -silmukassa solmu koodarikaverille. 
+
+Silmukoita käytetään siis kolmella tasolla silmukkaa, jolloin aikakompleksisuus nousee O(n^3). Javan Set tietorakenne ei tarjoa get() metodia, jolla pystyisi helposti hakemaan tietyn olion, vaan joudutaan käymään koko tietosäiliö läpi silmukalla. Silmukoiden käyttö monella tasolla aiheuttaa täytön hitautumisen.
+
+Hajautustaululla tehty korjaus paransi tehokkuutta, koska aikaisemmin koodarin hakeminen oli O(n) aikakompleksisuudeltaan, kun taas hajautustaulu muutti tästä O(1) operaation. Hajautustaulua hyödyntämällä voidaan välttää monta for -silmukkaa, jotka aikaisemmin olivat pakollisia Set:n takia. Kun silmukoita ei ole niin monella tasolla, nopeutuu aikakompleksisuuskin. Korjaus kuitenkin aiheutti sen, että muistikompleksisuus kasvoi, koska verteksien kuluttuma muisti tuplaantui.
+
+* Eri toteutuksien nopeuserojen vertailu
+Hashtable toteutuksen mittaukset
 ![Alt text](TIRA_TASK09_HASHTABLE_MITTAUKSET.png)
+
+HashMap toteutuksen mittaukset
 ![Alt text](TIRA_TASK09_HASHMAP_MITTAUKSET.png)
+
+Hashtable ja HashMap toteutuksen aikamittauksissa ei ole merkittäviä eroja, kun solmuja on 50000, on syvyyshaku hieman nopeampi HashMap toteutuksella, 
 ![Alt text](TIRA_TASK09_PAREMPI_TAYTTOAIKA.png)
+
+
+* Algoritmien aikatehokkuuden analysointi luentojen ja kirjallisuuden teoriaan verraten, perustele koodilla
+
+V = vertexit (solmut), E = edget (reunat)
+
+createVertexFor(T)
+![Alt text](createVertexFor.png)
+
+getVertices()
+
+![Alt text](getVertices.png)
+
+addEdge(type, source, destination, weight) ja addDirectedEdge(source, destination, weight)
+
+
+![Alt text](addEdge.png)
+
+
+![Alt text](getEdges.png)
+
+
+
+getVertexFor(T) metodin aikakompleksisuus oli alkuperäisellä toteutuksella (kommentoituna) O(V), koska siinä käytiin kaikki vertexit läpi for -silmukassa. Korjatulla toteutuksella aikakompleksisuus on O(1), koska vertexi haetaan hajautustaulusta hajautusavaimella.
+![Alt text](getVertexFor.png)
+
+
+
+Leveyshaussa askelten määrä riippuu verkon rakenteesta, aikakompleksisuus on O(V+E), mutta jos melkein kaikki solmut ovat connected (yhdistetty), on aikakompleksisuus O(n^2).
+![Alt text](leveyshaku.png)
+
+Syvyyshaun aikakompleksisuus on O(V+E)
+![Alt text](syvyyshaku.png)
+
+
+
+![Alt text](isDisconnected.png)
+
+isDisconnected ja disconnectedVertices ovat aikakompleksisuudeltaan myös O(V+E), koska disconnectedVertices metodi käyttää leveyshakua, ja isDisconnected taas käyttää disconnectedVertices metodia. Eli aina kun tarkistetaan onko verkko disconnected, tehdään leveyshakua, jolloin aikakompleksisuus on sama kuin leveyshaulla.
