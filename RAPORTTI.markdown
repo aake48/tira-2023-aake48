@@ -199,10 +199,10 @@ Quicksort on näistä algoritmeista nopein, ja 2 000 000 elementin kokoisen aine
 Heapsortissa 2 000 000 elementin kokoisen aineiston lajitteluun meni hieman yli 40 000 millisekuntia eli hieman yli 40 sekuntia eli heapsort on tällä aineistolla hitaampi kuin quicksort.
 
 
-![ms/element](ms/element.png)
+![Alt text](quicksort_heapsort_insertionsort.png)
 
 
-Taulukosta voidaan nähdä, että quicksortilla ja heapsortilla 1000 elementin aineistolla on isompi suoritusaika per elementti (0,23 ja 0,27) kuin 5000 elementin aineistolla (0,007 ja 0,009). Voidaan siis todeta että nämä lajittelualgoritmit toimivat paremmin isommalla aineistolla kuin pienellä.
+Taulukosta voidaan nähdä, että quicksortilla ja heapsortilla 1000 elementin aineistolla on isompi suoritusaika per elementti (0,23 ja 0,27) kuin 5000 elementin aineistolla (0,007 ja 0,009). Voidaan siis todeta että nämä lajittelualgoritmit toimivat paremmin hieman isommilla aineistoilla kuin todella pienillä.
 
 Voidaan huomata että tällä aineistolla ja näillä testeillä heapsort on hitaampi kuin quicksort, johtuen esim. siitä että heapsortilla keon rakentaminen ja uudelleen järjestely vie aikaa, kun taas quicksortissa lajittelu tapahtuu jakamalla joka on nopeampaa. Pahimmassa tapauksessa quicksortin aikakompleksisuus on Big-O notaatiolla O(n^2) kun taas heapsortilla se on O(n log n). Pahin tapaus tapahtuu quicksortilla silloin, kun pivottina toimii taulukon pienin tai suurin arvo, ja tämä arvo on oikealla paikallaan eli taulukon alussa tai lopussa. Ongelmaa pystyy kuitenkin "väistämään" suhteellisen hyvin ottamalla esimerkiksi taulukon alusta, keskeltä ja lopusta arvot, vertaamalla näitä keskenään ottamalla mediaani, jota käytetään sitten pivottina. Heapsortin hyvänä puolena taas on se, että pahimman tapauksen aikakompleksisuus on sama kuin quicksortin paras eli O(n log n), eli jos lajittelua tehdään usein ja siihen tarvitaan vakautta, kannattaa sillon valita heapsort.
 
@@ -292,9 +292,22 @@ Tässä tehtävässä opin miten verkko tietorakenne muodostetaan, miten sitä h
 
 * Ovatko verkot harvoja (sparse) vai tiheitä (dense)
 
+![Alt text](kaava.png)
+
+Ylläolevalla kaavalla voidaan laskea onko verkko tiheä vai ei, tuloksen mukaan määritellään verkon tiheys (mitä lähempänä tulos on 1, sitä tiheämpi verkko on).
+
+Voimme siis laskea testien tuloksilla kun solmuja on 100 000 ja reunoja 557 681 kuten testeissä:
+
+![Alt text](lasku.png)
+
+Koska tulokseksi tulee 0,000111537, ei verkko tällöin ole tiheä.
+Lähde: https://en.wikipedia.org/wiki/Dense_graph
+
 
 
 * Map vai matriisi, kumpi parempi tietorakenne tässä tehtävässä?
+
+Koska verkko ei ole tiheä, on Map tietorakenne parempi tässä tehtävässä. Map on myös joustava ja sopii hyvin tilanteisiin joissa solmujen määrä voi vaihdella, jolloin se on tehokkaampi muistin ja suorituskyvyn kannalta.
 
 * Miksi verkon täyttäminen on hidasta? Miksi ohjattu "korjaus" paransi tehokkuutta?
 
@@ -302,9 +315,9 @@ Tässä tehtävässä opin miten verkko tietorakenne muodostetaan, miten sitä h
 ![Alt text](pseudokoodi.png)
 Pseudokoodi esimerkistä voi hyvin nähdä miksi täyttämisessä kestää kauan. Aluksi on for silmukka kaikille koodareille, jonka jälkeen for -silmukassa haetaan solmu koodarille, tämän jälkeen haetaan koodarin kaverit, jota seuraa uusi for -silmukka kaikille kaikille koodarin kavereille, tämän jälkeen haetaan vielä for -silmukassa solmu koodarikaverille. 
 
-Silmukoita käytetään siis kolmella tasolla silmukkaa, jolloin aikakompleksisuus nousee O(n^3). Javan Set tietorakenne ei tarjoa get() metodia, jolla pystyisi helposti hakemaan tietyn olion, vaan joudutaan käymään koko tietosäiliö läpi silmukalla. Silmukoiden käyttö monella tasolla aiheuttaa täytön hitautumisen.
+Silmukoita käytetään siis kolmella tasolla silmukkaa, jolloin aikakompleksisuus nousee O(n^3). Javan Set tietorakenne ei tarjoa get() metodia, jolla pystyisi helposti hakemaan tietyn olion, vaan joudutaan käymään koko tietosäiliö läpi silmukalla. Sisäkkäiset silmukat aiheuttavat täytön hitautumisen.
 
-Hajautustaululla tehty korjaus paransi tehokkuutta, koska aikaisemmin koodarin hakeminen oli O(n) aikakompleksisuudeltaan, kun taas hajautustaulu muutti tästä O(1) operaation. Hajautustaulua hyödyntämällä voidaan välttää monta for -silmukkaa, jotka aikaisemmin olivat pakollisia Set:n takia. Kun silmukoita ei ole niin monella tasolla, nopeutuu aikakompleksisuuskin. Korjaus kuitenkin aiheutti sen, että muistikompleksisuus kasvoi, koska verteksien kuluttuma muisti tuplaantui.
+Hajautustaululla tehty korjaus paransi tehokkuutta, koska aikaisemmin koodarin hakeminen oli O(n) aikakompleksisuudeltaan, kun taas hajautustaulu muutti tästä O(1) operaation. Hajautustaulua hyödyntämällä voidaan välttää monta for -silmukkaa, jotka aikaisemmin olivat pakollisia Javan Set rajapintaluokan takia. takia. Kun silmukoita ei ole niin monella tasolla, nopeutuu aikakompleksisuuskin. Korjaus kuitenkin aiheutti sen, että muistikompleksisuus kasvoi, koska verteksien kuluttuma muisti tuplaantui.
 
 * Eri toteutuksien nopeuserojen vertailu
 Hashtable toteutuksen mittaukset
@@ -313,29 +326,28 @@ Hashtable toteutuksen mittaukset
 HashMap toteutuksen mittaukset
 ![Alt text](TIRA_TASK09_HASHMAP_MITTAUKSET.png)
 
-Hashtable ja HashMap toteutuksen aikamittauksissa ei ole merkittäviä eroja, kun solmuja on 50000, on syvyyshaku hieman nopeampi HashMap toteutuksella, 
+Hashtable ja HashMap toteutuksen aikamittauksissa ei ole merkittäviä eroja. Solmujen määrän noustessa 50000, on syvyyshaku hieman nopeampi HashMap toteutuksella, 
 ![Alt text](TIRA_TASK09_PAREMPI_TAYTTOAIKA.png)
 
 
-* Algoritmien aikatehokkuuden analysointi luentojen ja kirjallisuuden teoriaan verraten, perustele koodilla
+* Algoritmien aikatehokkuuden analysointi
 
 V = vertexit (solmut), E = edget (reunat)
 
-createVertexFor(T)
+createVertexFor(T) metodin aikakompleksisuus on O(1), koska se ei sisällä silmukoita ja vertexiin ja ArrayListiin sijoittaminen on myös O(1)
 ![Alt text](createVertexFor.png)
 
-getVertices()
+
+getVertices() aikakompleksisuus on O(1), getVertices() ei sisällä silmukoita.
 
 ![Alt text](getVertices.png)
 
-addEdge(type, source, destination, weight) ja addDirectedEdge(source, destination, weight)
-
-
+Reunojen lisääminen on O(1) operaatio
 ![Alt text](addEdge.png)
 
-
+Reunojen hakeminen on myös O(1) operaatio
 ![Alt text](getEdges.png)
-
+Reunojen hakeminen on myös O(1) operaatio
 
 
 getVertexFor(T) metodin aikakompleksisuus oli alkuperäisellä toteutuksella (kommentoituna) O(V), koska siinä käytiin kaikki vertexit läpi for -silmukassa. Korjatulla toteutuksella aikakompleksisuus on O(1), koska vertexi haetaan hajautustaulusta hajautusavaimella.
@@ -343,7 +355,7 @@ getVertexFor(T) metodin aikakompleksisuus oli alkuperäisellä toteutuksella (ko
 
 
 
-Leveyshaussa askelten määrä riippuu verkon rakenteesta, aikakompleksisuus on O(V+E), mutta jos melkein kaikki solmut ovat connected (yhdistetty), on aikakompleksisuus O(n^2).
+Leveyshaussa askelten määrä riippuu verkon rakenteesta, aikakompleksisuus on O(V+E), mutta jos melkein kaikki solmut ovat connected (yhdistetty), on E lähellä V^2, jolloin aikakompleksisuus nousee O(V^2).
 ![Alt text](leveyshaku.png)
 
 Syvyyshaun aikakompleksisuus on O(V+E)
