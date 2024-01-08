@@ -29,7 +29,6 @@ public class ParenthesisChecker {
          }
 
          if (quoteStatus == true) {
-
             continue;
          }
 

@@ -279,8 +279,4 @@ public class Algorithms {
       return (2 * i + 1);
    }
 
-   // Not used in task06, left if needed in later tasks
-   private static int rightChild(int i) {
-      return (2 * i + 2);
-   }
 }

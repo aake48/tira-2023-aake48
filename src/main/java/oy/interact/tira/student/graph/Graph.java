@@ -141,14 +141,6 @@ public class Graph<T> {
     *         element.
     */
    public Vertex<T> getVertexFor(T element) {
-      /*
-       * for (Vertex<T> vertex : edgeList.keySet()) {
-       * if (vertex.getElement().equals(element)) {
-       * return vertex;
-       * }
-       * }
-       * return null;
-       */
       Integer hash = element.hashCode();
       return vertices.get(hash);
    }

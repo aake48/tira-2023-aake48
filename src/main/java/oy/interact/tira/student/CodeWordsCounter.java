@@ -100,30 +100,6 @@ public class CodeWordsCounter {
 			}
 			
 		}
-		// STUDENTS: TODO: Implement this pseudocode to fill the hash table with unique
-		// word counts
-		// from the source code file.
-		// 1. Get a code point at the index from content.
-		// 2. If the code point is a letter character...
-		// 2.1 Add it to the wordChars array to codeWordIndex and add one to
-		// codeWordIndex.
-		// ...else we have a word break char and wordChars contains now a word:
-		// 2.2 If the array has 2 or more chars (do not count one char "words")...
-		// 2.2.1 Convert the array of chars to String object.
-		// 2.2.2 Convert the string to lowercase (we treat "char" and "CHAR" as one
-		// "char" word)
-		// 2.2.3 Get the word count from the hashtable (word is key, returned value from
-		// hashtable is the count)
-		// 2.2.4 If we got null, hashtable does not have this word, then...
-		// 2.2.4.1 add the word with count 1 to the hashtable; word appears once so far.
-		// 2.2.5 ...else, word already appears in hash table, so
-		// 2.2.5.1 Add the word to hashtable with count increased by one
-		// (Remember that adding the same key to hashtable must update the value already
-		// in hashtable).
-		// 2.3 Reset the codeWordIndex to zero so next new word will start filling the
-		// wordChars array from the start.
-
-		// ^^ STUDENTS: your implementation after the commens.
 		cumulativeTimeInMilliseconds += System.currentTimeMillis() - start;
 	}
 
@@ -159,17 +135,4 @@ public class CodeWordsCounter {
 		return resultArray;
 	}
 
-	// STUDENTS: TODO: Implement this pseudocode to get the top words sorted by
-	// frequency of use from hash table.
-	// 1. Get, from the hash table, pairs of all words and word counts from hash
-	// table to an array.
-	// 2. Use your fast sort algorithm to sort the array of pairs by word count,
-	// descending (!) order,
-	// so that the word that is most frequent, is the first in the array.
-	// 3. Allocate a new array (let's call it result array) of size topCount,
-	// or _smaller_ if the array has _less_ than topCount items.
-	// Let's say the resulting new array size is n.
-	// 4. Put the first n items from the array of all pairs to this result array of
-	// size n.
-	// 5. Return the results array to caller.
 }

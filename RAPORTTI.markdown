@@ -218,15 +218,24 @@ Binäärisen hakupuun algoritmien aikakompleksisuudet ovat seuraavat:
 n = aineiston koko (puun korkeus)
 
 add(K key, V value) = O(n)
+
 V get(K key) = O(n)
+
 V find(Predicate<V> searcher) = O(n)
+
 int size() = O(1)
+
 int capacity() = O(1)
+
 clear() = O(1)
+
 Pair<K, V>[] toArray() = O(n), rekursiivinen toteutus, navigointi puun solmujen läpi
-int indexOf(K itemkey) = O(n), joudutaan käyttämään looppia
-Pair<K,V> getIndex(int index) = O(n), joudutaan käyttämään looppia
-int findIndex(Predicate <V> searcher) = O(n), joudutaan käyttämään looppia
+
+int indexOf(K itemkey) = O(n), joudutaan käyttämään silmukkaa
+
+Pair<K,V> getIndex(int index) = O(n), joudutaan käyttämään silmukkaa
+
+int findIndex(Predicate <V> searcher) = O(n), joudutaan käyttämään silmukkaa
 
 Algoritmit ovat oikeellisia, koska esim. kun navigoidaan puun solmujen läpi, ja oikea tieto löytyy, niin se palautetaan. Jos oikeaa tietoa ei löydy niin palautetaan null, eli algoritmit eivät jää solmuihin "jumiin" tai ikuiseen silmukkaan. 
 
@@ -280,10 +289,29 @@ Hajautustaulu nopea toteutus
 Hajautustaulu hidas taulukkototeutus
 ![SIMPLECONTAINER_MITTAUKSET](SIMPLECONTAINER_MITTAUKSET2.png)
 
+BST:n nopeampi toteutus on hitaampi kuin hajautustaulun nopea totetutus, kun katsotaan aikaa joka menee elementin lisäämiseen. 1 000 000 kokoisella aineistolla add time on 4572, kun taas hajautustaululla se on 3119ms. Tämä johtuu siitä, että BST:n korkeuden kasvaessa menee lisäämiseenkin enemmän aikaa, koska lisättäessä joudutaan käymään solmuja läpi. Hajautustaulussa taas lasketaan elementille tiiviste, jonka perusteella se lisätään taulukkoon, joka on O(1) operaatio, olettaen että ei tule paljoa törmäyksiä. Hajautustaulu on myös nopeampi kun haetaan jotain elementtiä, esim. BST:llä 1 000 000 kokoisella aineistolla meni haussa 3374ms ja hajautustaululla 1560ms. Tämä aiheutuu samasta syystä kuin aikaisemmin mainittu: BST:ssä joudutaan käymään solmuja läpi, kun taas hajautustaulussa lasketaan tiiviste, jonka perusteella elementti löydetään.
+
+BST:n ja hajautustaulun välillä on myös ero kun puhutaan elementtien järjestyksestä. BST:ssä elementit ovat järjestyksessä, kun taas hajautustaulussa ei, jolloin BST:n aikakompleksisuus lajittelun suhteen on parempi kuin hajautustaulun (BST 42ms vs HT 30289ms).
+
+Pienillä aineistoilla ainoa merkittävä ero BST:n ja hajautustaulun välillä on lajittelussa, ja se johtuu kuten aikaisemmin mainittu, hajautustaulun lajittelemattomuudesta, kun taas BST on lajiteltu.
 ![HAJAUTUSTAULU_HAKUAIKA](HAJAUTUSTAULU_HAKUAIKA.png)
 ![SIMPLECONTAINER_HAKUAIKA](SIMPLECONTAINER_HAKUAIKA.png)
 
+
+
 Kun vertaa taulukkopohjaista toteutusta ja hajautustaulua, voidaan huomata että taulukkopohjaisella toteutuksella haku kestää kauemmin (miljoonan kokoisella aineistolla jopa 18ms/item), koska aikakompleksisuus on O(n) kun joudutaan käymään taulukkoa läpi. Hajautustaululla taas aikakompleksisuus on O(1) kun voidaan suoraan hajautusavaimella hakea elementti, eikä tarvitse tehdä läpikäyntiä.
+
+BST:n hidas taulukkototeutus on nopeampi kuin BST:n nopea toteutus indeksillä haettaessa, koska taulukkopohjaisessatoteutuksessa taulukon elementtiin pääsee suoraan käsiksi indeksillä, kun taas nopeassa BST:ssä pitää käydä solmuja läpi.
+
+
+
+![Alt text](hashingApp_tulokset.png)
+
+UUID Hash työkalulla tehdyt mittaukset erilaisilla
+
+![Alt text](coder_hashCode.png)
+
+Hashcode metodin lopputulos johon päädyin mittausten jälkeen.
 ## 09-TASK
 
 * Mitä opin, mikä oli vaikeaa jne.
@@ -347,7 +375,6 @@ Reunojen lisääminen on O(1) operaatio
 
 Reunojen hakeminen on myös O(1) operaatio
 ![Alt text](getEdges.png)
-Reunojen hakeminen on myös O(1) operaatio
 
 
 getVertexFor(T) metodin aikakompleksisuus oli alkuperäisellä toteutuksella (kommentoituna) O(V), koska siinä käytiin kaikki vertexit läpi for -silmukassa. Korjatulla toteutuksella aikakompleksisuus on O(1), koska vertexi haetaan hajautustaulusta hajautusavaimella.
